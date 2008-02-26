@@ -1,0 +1,19 @@
+[define body]
+<h2>Repository Access</h2>
+
+<p>
+  The code is maintained in a <a href="http://git.or.cz/">Git</a>
+  repository.  To clone the repository:
+</p>
+
+<div class="code">
+  git clone git://oss.readytalk.com/avian.git
+</div>
+
+<p>
+  The web interface to this repository
+  is <a href="http://oss.readytalk.com/gitweb?p=avian.git">here</a>.
+</p>
+[end]
+
+[template "primary.xml"]

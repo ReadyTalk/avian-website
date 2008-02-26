@@ -1,0 +1,9 @@
+[define body]
+<h2>Status</h2>
+<p>
+  todo
+</p>
+
+[end]
+
+[template "primary.xml"]

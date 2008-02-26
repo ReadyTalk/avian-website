@@ -1,0 +1,69 @@
+[define body]
+<h2>About Avian</h2>
+<p>
+  Avian is a lightweight virtual machine and class library designed to
+  provide a useful subset of Java's features, suitable for building
+  self-contained applications.
+</p>
+
+<h3>Efficient</h3>
+<p>
+  The VM is implemented from scratch and designed to be both fast and small.
+</p>
+<ul>
+  <li>Just-In-Time (JIT) compilation for fast method execution</li>
+  <li>Generational, copying garbage collection ensures short pause
+  times and good spatial locality</li>
+  <li>Thread-local heaps provide O(1) memory allocation with no
+  synchronization overhead</li>
+  <li>Null pointer dereferences are handled via OS signals to avoid
+  unecessary branches</li>
+</ul>
+<p>
+  The class library is designed to be as loosely-coupled as possible,
+  allowing tools
+  like <a href="http://proguard.sourceforge.net/">ProGuard</a> to
+  aggressively isolate the minimum code needed for an application.
+  This translates to smaller downloads and faster startup.
+</p>
+
+<h3>Portable</h3>
+<p>
+  Platform-specific code is hidden behind a generic interface, so
+  adding support for new OSes is easy.  Avian currently supports Linux
+  (i386 and x86_64), Windows (i386), and OS X (i386), with more to
+  come.
+</p>
+<p>
+  The only third-party dependency beyond OS-provided libraries
+  is <a href="http://zlib.net/">zlib</a>, which is itself very
+  portable.  Although the VM is written in C++, it does not depend on
+  the C++ standard library, and is thus robust in the face of ABI
+  changes.
+</p>
+
+<h3>Embeddable</h3>
+<p>
+  Not only can applications embed the VM, but the VM itself supports
+  class and resource loading from embedded jar files.  This means you
+  can produce a single executable containing your entire application,
+  thus simplifying the installation process.
+</p>
+
+<h3>Non-goals</h3>
+<p>
+  Avian is not a complete Java implementation, nor is it intended to
+  be.  Thus, less-used Java features will only be added if they are
+  easily maintainable and do not add significant overhead to
+  applications which don't use them.
+</p>
+<p>
+  In particular, Avian does no bytecode verification in the VM and no
+  security checks in the class library.  Applications which run
+  untrusted bytecode must therefore do their own verification and
+  sanitation.
+</p>
+
+[end]
+
+[template "primary.xml"]

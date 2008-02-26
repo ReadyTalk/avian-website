@@ -1,0 +1,8 @@
+[define body]
+<h2>Building</h2>
+<object data="/gitweb?p=avian.git;a=blob_plain;f=readme.txt;hb=HEAD"
+        type="text/plain" width="640" height="400">
+</object>
+[end]
+
+[template "primary.xml"]

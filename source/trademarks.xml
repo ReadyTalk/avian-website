@@ -1,0 +1,11 @@
+[define body]
+<h2>Trademarks</h2>
+<p>
+  Java, J2SE, and all other Java-based marks are trademarks or
+  registered trademarks of Sun Microsystems, Inc. in the United States
+  and other countries.  The Avian project is not affiliated with Sun
+  Microsystems.
+</p>
+[end]
+
+[template "primary.xml"]
