@@ -1,8 +1,0 @@
-[define body]
-<h2>Mailing List</h2>
-<p>
-  todo
-</p>
-[end]
-
-[template "primary.xml"]
