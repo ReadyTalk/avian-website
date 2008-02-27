@@ -8,7 +8,8 @@
 
 <h3>Efficient</h3>
 <p>
-  The VM is implemented from scratch and designed to be both fast and small.
+  The VM is implemented from scratch and designed to be both fast and
+  small.
 </p>
 <ul>
   <li>Just-In-Time (JIT) compilation for fast method execution</li>
@@ -48,20 +49,6 @@
   class and resource loading from embedded jar files.  This means you
   can produce a single executable containing your entire application,
   thus simplifying the installation process.
-</p>
-
-<h3>Non-goals</h3>
-<p>
-  Avian is not a complete Java implementation, nor is it intended to
-  be.  Thus, less-used Java features will only be added if they are
-  easily maintainable and do not add significant overhead to
-  applications which don't use them.
-</p>
-<p>
-  In particular, Avian does no bytecode verification in the VM and no
-  security checks in the class library.  Applications which run
-  untrusted bytecode must therefore do their own verification and
-  sanitation.
 </p>
 
 [end]
