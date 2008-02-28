@@ -1,6 +1,6 @@
 MAKEFLAGS = -s
 
-rsync = rsync -avz --rsync-path="sudo rsync" 
+rsync = rsync -rvz
 
 out = output
 src = source
@@ -18,8 +18,10 @@ extra_sources = $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
+.PHONY: all
 all: $(results) $(extra_results)
 
+.PHONY: deploy
 deploy: $(results) $(extra_results)
 	$(rsync) $(out)/ oss.readytalk.com:/var/www/avian/
 	$(rsync) ../avian/build/javadoc/ oss.readytalk.com:/var/www/avian/javadoc/
@@ -34,6 +36,7 @@ $(extra_results): $(out)/%: $(tpl)/%
 	@mkdir -p $(dir $(@))
 	cp $(<) $(@)
 
+.PHONY: clean
 clean:
 	@echo "removing $(out)"
 	rm -rf $(out)
