@@ -76,7 +76,7 @@ git clone git://oss.readytalk.com/win32.git
 # for darwin-i386:
 # (upstream SWT requires a patch:
 #  https://bugs.eclipse.org/bugs/show_bug.cgi?id=207511)
-wget http://oss.readytalk.com/avian/swt-3.3.1.1-carbon-macosx-patched.zip
+curl -O http://oss.readytalk.com/avian/swt-3.3.1.1-carbon-macosx-patched.zip
 mkdir -p swt-3.3/darwin-i386
 unzip -d swt-3.3/darwin-i386 swt-3.3.1.1-carbon-macosx-patched.zip
 
