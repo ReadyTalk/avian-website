@@ -63,10 +63,10 @@ div.topleft   { position: absolute;
 div.topmiddle { position: absolute;
                 left: 120px; top: 0px;
                 right: 0px; height: 80px;
-                border-top:    0px solid #000;
-                border-right:  0px solid #000;
-                border-bottom: 0px solid #000;
-                border-left:   0px solid #000; }
+                border-top:    0px solid #943;
+                border-right:  0px solid #943;
+                border-bottom: 0px solid #943;
+                border-left:   0px solid #943; }
 
 div.left      { position: absolute;
                 left: 0px; top: 80px;
@@ -75,20 +75,20 @@ div.left      { position: absolute;
 div.middle    { position: absolute;
                 left: 120px; top: 80px;
                 right: 0px; bottom: 0px;
-                border-top:    1px solid #000;
-                border-right:  0px solid #000;
-                border-bottom: 0px solid #000;
-                border-left:   1px solid #000;
+                border-top:    1px solid #943;
+                border-right:  0px solid #943;
+                border-bottom: 0px solid #943;
+                border-left:   1px solid #943;
                 padding: 5px 10px 5px 10px; }
                              
 div.bgleft, div.bgleft-fixed
               { position: absolute;
                 left: 0px; top: 0px;
                 width: 120px; height: 100%;
-                border-top:    0px solid #000;
-                border-right:  0px solid #000;
-                border-bottom: 0px solid #000;
-                border-left:   0px solid #000; }
+                border-top:    0px solid #943;
+                border-right:  0px solid #943;
+                border-bottom: 0px solid #943;
+                border-left:   0px solid #943; }
 
 div.bgleft-fixed
               { position: fixed;
@@ -98,10 +98,10 @@ div.bgmiddle, div.bgmiddle-fixed
               { position: absolute;
                 left: 120px; top: 0px;
                 height: 100%;
-                border-top:    0px solid #000;
-                border-right:  0px solid #000;
-                border-bottom: 0px solid #000;
-                border-left:   1px solid #000; }
+                border-top:    0px solid #943;
+                border-right:  0px solid #943;
+                border-bottom: 0px solid #943;
+                border-left:   1px solid #943; }
 
 div.bgmiddle-fixed
               { position: fixed;
@@ -120,34 +120,34 @@ div.left ul    { position: absolute;
                  margin:  0px 0px 0px 0px;
                  padding: 0px;
                  list-style-type: none;
-                 border-bottom: 1px solid #000; }
+                 border-bottom: 1px solid #943; }
 
 div.left ul ul  { position: relative;
                   width: auto;
                   margin:        0px 0px 0px 8px;
-                  border-bottom: 0px solid #000; }
+                  border-bottom: 0px solid #943; }
 
 div.left li     { padding: 0px;
-                  border-top:    1px solid #000; }
+                  border-top:    1px solid #943; }
 
-div.left li ul li { border-left:   1px solid #000;
+div.left li ul li { border-left:   1px solid #943;
                     border-right: 0px; }
 
 div.le  { padding: 5px;
-          border-right: 1px solid #000 }
+          border-right: 1px solid #943 }
 
 div.les { padding: 5px; }
 
 div.middle li { margin: 0px;
                 padding: 0px 0px 4px 0px; }
 
-div.code    { border: 1px solid #000;
+div.code    { border: 1px solid #943;
               padding: 5px;} 
 
 div.codeComment { font-style: italic;
                   margin-left: 50px; } 
 
-table { border: 1px solid #000;
+table { border: 1px solid #943;
         border-collapse: collapse; }
 
 table.req { width: 600px; }
@@ -166,4 +166,4 @@ table.code col.second { width: 50% }
 
 table td { padding: 5px;
            vertical-align: top;
-           border: 1px solid #000; }
+           border: 1px solid #943; }
