@@ -1,9 +1,9 @@
 [define body]
 <h2>Examples</h2>
 <p>
-  Avian is well-suited to building lightweight, self-contained
-  applications.  To demonstrate this, we've taken a few demo
-  applications from the Eclipse CVS repository and built them using
+  Avian is well-suited to building small, self-contained applications.
+  To demonstrate this, we've taken a few demo applications from the
+  Eclipse CVS repository and built them using
   Avian, <a href="http://proguard.sourceforge.net/">ProGuard</a>,
   and <a href="http://upx.sourceforge.net">UPX</a>.
 </p>
