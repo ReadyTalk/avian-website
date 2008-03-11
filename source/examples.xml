@@ -39,7 +39,10 @@
     <td><a href="swt-examples/windows-i386/paint.exe">download</a></td>
   </tr>
 </table>
-<br/>
+<p>
+  Note that the OS X builds are not compressed using UPX, due to
+  issues encountered with building and using UPX on OS X 10.4.
+</p>
 
 <h3>Building</h3>
 <p>

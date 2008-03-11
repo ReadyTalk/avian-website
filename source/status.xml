@@ -3,18 +3,31 @@
 
 <h3>Current Release</h3>
 <p>
-  The first and latest release is version 0.0.  As of this release,
-  there are no known bugs, so everything should work as advertised on
-  the supported platforms.  Please post to
-  the <a href="http://groups.google.com/group/avian">group</a> if you
-  have any problems.
+  The latest release is version 0.0.1.  As of this release, everything
+  should work as advertised on the supported platforms.  Please post
+  to the <a href="http://groups.google.com/group/avian">group</a> if
+  you have any problems.
 </p>
 
-<a href="avian-0.0.tar.bz2">
+<a href="avian-0.0.1.tar.bz2">
   <div class="code">
-    Download Avian 0.0
+    Download Avian 0.0.1
   </div>
 </a>
+
+<p>
+  Notable changes since the last release:
+</p>
+<ul>
+  <li>Fixed the algorithm responsible for static stack analysis to
+  determine where the object references are on the stack for garbage
+  collection.  The old version gave false positives in rare cases,
+  leading to crashes when garbage collecting.</li>
+  <li>Fixed thinko in Math.random implementation on Windows</li>
+  <li>Fixed off-by-one error in StringBuilder.insert</li>
+  <li>Added a few more class library methods, including Double.isNaN,
+  Double.isInfinite, and Collection.addAll</li>
+</ul>
 
 <h3>Next Release</h3>
 <p>
