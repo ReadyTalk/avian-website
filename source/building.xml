@@ -1,3 +1,5 @@
+[define title]Building[end]
+
 [define body]
 <h2>Building</h2>
 <object data="/gitweb?p=avian.git;a=blob_plain;f=readme.txt;hb=HEAD"
