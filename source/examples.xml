@@ -56,8 +56,8 @@ cd work
 git clone git://oss.readytalk.com/avian.git
 git clone git://oss.readytalk.com/avian-swt-examples.git
 wget http://superb-east.dl.sourceforge.net/sourceforge/proguard\
-/proguard4.1.tar.gz
-tar xzf proguard4.1.tar.gz
+/proguard4.2.tar.gz
+tar xzf proguard4.2.tar.gz
 
 # for linux-i386:
 wget http://ftp.osuosl.org/pub/eclipse/eclipse/downloads/drops\
