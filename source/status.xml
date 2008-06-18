@@ -5,20 +5,20 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.1.  As of this release, everything
+  The latest release is version 0.1.1.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
-  to the <a href="http://groups.google.com/group/avian">group</a> if
-  you have any problems.
+  to the <a href="http://groups.google.com/group/avian">discussion
+  group</a> if you have any problems.
 </p>
 
-<a href="avian-0.1.tar.bz2">
+<a href="avian-0.1.1.tar.bz2">
   <div class="code">
-    Download Avian 0.1
+    Download Avian 0.1.1
   </div>
 </a>
 
 <p>
-  Notable changes since the last release:
+  Recent changes:
 </p>
 <ul>
   <li>Rewrote the JIT compiler to use machine registers more
@@ -45,9 +45,12 @@
   criteria for that release:
 </p>
 <ul>
-  <li>Support Mac OS X on PowerPC</li>
+  <li>Support Mac OS X on PowerPC (in progress - see powerpc branch in
+  repository)</li>
   <li>Rework memory allocation in garbage collector to improve
-  performance in low memory situations (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a> for details)</li>
+  performance in low memory situations
+  (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
+  for details)</li>
 </ul>
 
 <h3>Post-1.0 Ideas</h3>
