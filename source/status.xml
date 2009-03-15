@@ -45,8 +45,7 @@
   criteria for that release:
 </p>
 <ul>
-  <li>Support Mac OS X on PowerPC (in progress - see powerpc branch in
-  repository)</li>
+  <li>Support Mac OS X on PowerPC (in progress)</li>
   <li>Rework memory allocation in garbage collector to improve
   performance in low memory situations
   (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
@@ -59,6 +58,7 @@
   languages other than Java
     <ul>
       <li>Tail call optimization</li>
+      <li>Cooperative multitasking</li>
       <li>First-class functions</li>
       <li><a href="http://jcp.org/en/jsr/detail?id=292">invokedynamic</a></li>
     </ul>

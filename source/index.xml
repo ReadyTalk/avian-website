@@ -41,7 +41,7 @@
   The only third-party dependency beyond OS-provided libraries
   is <a href="http://zlib.net/">zlib</a>, which is itself very
   portable.  Although the VM is written in C++, it does not depend on
-  the C++ standard library, and is thus robust in the face of ABI
+  the C++ standard library, and is therefore robust in the face of ABI
   changes.
 </p>
 

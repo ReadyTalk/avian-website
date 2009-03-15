@@ -35,6 +35,12 @@
     <td><a href="swt-examples/darwin-i386/paint">download</a></td>
   </tr>
   <tr>
+    <td>OS X/PowerPC</td>
+    <td><a href="swt-examples/darwin-powerpc/example">download</a></td>
+    <td><a href="swt-examples/darwin-powerpc/graphics">download</a></td>
+    <td><a href="swt-examples/darwin-powerpc/paint">download</a></td>
+  </tr>
+  <tr>
     <td>Windows/i386</td>
     <td><a href="swt-examples/windows-i386/example.exe">download</a></td>
     <td><a href="swt-examples/windows-i386/graphics.exe">download</a></td>
@@ -55,38 +61,39 @@ mkdir work
 cd work
 git clone git://oss.readytalk.com/avian.git
 git clone git://oss.readytalk.com/avian-swt-examples.git
-wget http://superb-east.dl.sourceforge.net/sourceforge/proguard\
-/proguard4.2.tar.gz
-tar xzf proguard4.2.tar.gz
+# use curl -O on OS X:
+wget http://oss.readytalk.com/avian/proguard4.3.tar.gz
+tar xzf proguard4.3.tar.gz
 
 # for linux-i386:
-wget http://ftp.osuosl.org/pub/eclipse/eclipse/downloads/drops\
-/R-3.3.1.1-200710231652/swt-3.3.1.1-gtk-linux-x86.zip
-mkdir -p swt-3.3/linux-i386
-unzip -d swt-3.3/linux-i386 swt-3.3.1.1-gtk-linux-x86.zip
+wget http://oss.readytalk.com/avian/swt-3.4-gtk-linux-x86.zip
+mkdir -p swt-3.4/linux-i386
+unzip -d swt-3.4/linux-i386 swt-3.4-gtk-linux-x86.zip
 
 # for linux-x86_64:
-wget http://ftp.osuosl.org/pub/eclipse/eclipse/downloads/drops\
-/R-3.3.1.1-200710231652/swt-3.3.1.1-gtk-linux-x86_64.zip
-mkdir -p swt-3.3/linux-x86_64
-unzip -d swt-3.3/linux-x86_64 swt-3.3.1.1-gtk-linux-x86_64.zip
+wget http://oss.readytalk.com/avian/swt-3.4-gtk-linux-x86_64.zip
+mkdir -p swt-3.4/linux-x86_64
+unzip -d swt-3.4/linux-x86_64 swt-3.4-gtk-linux-x86_64.zip
 
 # for windows-i386:
-wget http://ftp.osuosl.org/pub/eclipse/eclipse/downloads/drops\
-/R-3.3.1.1-200710231652/swt-3.3.1.1-win32-win32-x86.zip
-mkdir -p swt-3.3/windows-i386
-unzip -d swt-3.3/windows-i386 swt-3.3.1.1-win32-win32-x86.zip
+wget http://oss.readytalk.com/avian/swt-3.4-win32-win32-x86.zip
+mkdir -p swt-3.4/windows-i386
+unzip -d swt-3.4/windows-i386 swt-3.4-win32-win32-x86.zip
 git clone git://oss.readytalk.com/win32.git
 
 # for darwin-i386:
-# (upstream SWT requires a patch:
-#  https://bugs.eclipse.org/bugs/show_bug.cgi?id=207511)
-curl -O http://oss.readytalk.com/avian/swt-3.3.1.1-carbon-macosx-patched.zip
-mkdir -p swt-3.3/darwin-i386
-unzip -d swt-3.3/darwin-i386 swt-3.3.1.1-carbon-macosx-patched.zip
+curl -O http://oss.readytalk.com/avian/swt-3.4-carbon-macosx-javac.zip
+mkdir -p swt-3.4/darwin-i386
+unzip -d swt-3.4/darwin-i386 swt-3.4-carbon-macosx-javac.zip
+
+# for darwin-powerpc:
+curl -O http://oss.readytalk.com/avian/swt-3.4-carbon-macosx-javac.zip
+mkdir -p swt-3.4/darwin-powerpc
+unzip -d swt-3.4/darwin-powerpc swt-3.4-carbon-macosx-javac.zip
 
 cd avian-swt-examples
-make # or make platform=windows if cross-compiling for Win32</pre></div>
+# use make platform=windows if cross-compiling for Win32:
+make</pre></div>
 </p>
 
 [end]
