@@ -62,8 +62,8 @@ cd work
 git clone git://oss.readytalk.com/avian.git
 git clone git://oss.readytalk.com/avian-swt-examples.git
 # use curl -O on OS X:
-wget http://oss.readytalk.com/avian/proguard4.3.tar.gz
-tar xzf proguard4.3.tar.gz
+wget http://oss.readytalk.com/avian/proguard4.3-patched.tar.gz
+tar xzf proguard4.3-patched.tar.gz
 
 # for linux-i386:
 wget http://oss.readytalk.com/avian/swt-3.4-gtk-linux-x86.zip

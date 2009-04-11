@@ -5,15 +5,15 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.1.1.  As of this release, everything
+  The latest release is version 0.2.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
   to the <a href="http://groups.google.com/group/avian">discussion
   group</a> if you have any problems.
 </p>
 
-<a href="avian-0.1.1.tar.bz2">
+<a href="avian-0.2.tar.bz2">
   <div class="code">
-    Download Avian 0.1.1
+    Download Avian 0.2
   </div>
 </a>
 
@@ -21,35 +21,34 @@
   Recent changes:
 </p>
 <ul>
-  <li>Rewrote the JIT compiler to use machine registers more
-  efficiently.  The new compiler generates code which is:
-    <ul>
-      <li>50-100% faster for CPU-intensive tasks such as decoding
-      images</li>
-      <li>25-30% smaller on average</li>
-    </ul>
-    Most importantly, the new design is much less
-    architecture-specific than the old one, making it easier to
-    support ISAs besides x86 efficiently.
-  </li>
-  <li>Implemented Thread.getStackTrace.  This method is especially
-  useful for sample-based performance profiling.</li>
-  <li>Added support for building Avian as a shared library on all
-  platforms</li>
-  <li>Various bugfixes and code cleanups</li>
+  <li>Modified JIT compiler to support PowerPC, including changes
+  which should make porting to other ISAs and ABIs much easier.</li>
+  <li>Implemented proper UTF-8 encoding and decoding in
+  java.lang.String</li>
+  <li>Added support for volatile fields.  Avian now fully supports the
+  Java Memory Model.</li>
+  <li>Added ad-hoc interface for generating heap snapshots at runtime,
+  useful for memory profiling</li>
+  <li>Added support for ahead-of-time compilation and classfile
+  parsing.  This feature helps improve the startup time of large
+  applications and reduces GC overhead, at the cost of larger
+  binaries.</li>
+  <li>Numerous bugfixes and performance improvements</li>
 </ul>
 
-<h3>Next Release</h3>
+<h3>Future Releases</h3>
 <p>
   The next major release will be 1.0.  These are the remaining
   criteria for that release:
 </p>
 <ul>
-  <li>Support Mac OS X on PowerPC (in progress)</li>
   <li>Rework memory allocation in garbage collector to improve
   performance in low memory situations
   (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
   for details)</li>
+  <li>Adapt Avian to support a more complete class library, such as
+  GNU Classpath or IcedTea.  This will give us a much larger body of
+  software to test against.</li>
 </ul>
 
 <h3>Post-1.0 Ideas</h3>
