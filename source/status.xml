@@ -24,16 +24,16 @@
   <li>Modified JIT compiler to support PowerPC, including changes
   which should make porting to other ISAs and ABIs much easier.</li>
   <li>Implemented proper UTF-8 encoding and decoding in
-  java.lang.String</li>
+  java.lang.String.</li>
   <li>Added support for volatile fields.  Avian now fully supports the
   Java Memory Model.</li>
-  <li>Added ad-hoc interface for generating heap snapshots at runtime,
-  useful for memory profiling</li>
+  <li>Added an ad-hoc interface for generating heap snapshots at
+  runtime, useful for memory profiling.</li>
   <li>Added support for ahead-of-time compilation and classfile
   parsing.  This feature helps improve the startup time of large
   applications and reduces GC overhead, at the cost of larger
   binaries.</li>
-  <li>Numerous bugfixes and performance improvements</li>
+  <li>Fixed various bugs and performance bottlenecks.</li>
 </ul>
 
 <h3>Future Releases</h3>

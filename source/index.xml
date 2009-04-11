@@ -34,8 +34,8 @@
 <p>
   Platform-specific code is hidden behind a generic interface, so
   adding support for new OSes is easy.  Avian currently supports Linux
-  (i386 and x86_64), Windows (i386), and OS X (i386), with more to
-  come.
+  (i386 and x86_64), Windows (i386), and OS X (i386 and PowerPC), with
+  more to come.
 </p>
 <p>
   The only third-party dependency beyond OS-provided libraries
