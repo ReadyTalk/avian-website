@@ -28,10 +28,10 @@
   <li>Add optional support for first-class,
   reentrant <a href="http://en.wikipedia.org/wiki/Continuation">continuations</a>.
   See the <a href="javadoc/avian/Continuations.html">API
-  documentation</a> for details</li>
+  documentation</a> for details.</li>
   <li>Add support for native 64-bit Windows and OS X builds.</li>
   <li>Support building with the Microsoft Visual C++ compiler on
-  Windows</li>
+  Windows.</li>
   <li>Add support for scalar SSE instructions to the JIT compiler,
   making floating point code up to five times faster on machines which
   support SSE2.</li>
