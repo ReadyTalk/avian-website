@@ -42,7 +42,7 @@
   the VM.  This avoids expensive system calls due to mutex contention
   and is especially valuable for multithreaded programs which make
   heavy use of the JNI.</li>
-  <li>Support runtime-visible annotation annotations.</li>
+  <li>Support runtime-visible annotations.</li>
   <li>Support both blocking and non-blocking NIO sockets.</li>
   <li>Add preliminary support for building with GNU Classpath.  This
   feature is still under development.</li>
