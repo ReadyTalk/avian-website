@@ -5,15 +5,15 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.2.  As of this release, everything
+  The latest release is version 0.3.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
   to the <a href="http://groups.google.com/group/avian">discussion
   group</a> if you have any problems.
 </p>
 
-<a href="avian-0.2.tar.bz2">
+<a href="avian-0.3.tar.bz2">
   <div class="code">
-    Download Avian 0.2
+    Download Avian 0.3
   </div>
 </a>
 
@@ -21,31 +21,39 @@
   Recent changes:
 </p>
 <ul>
-  <li>Modified JIT compiler to support PowerPC, including changes
-  which should make porting to other ISAs and ABIs much easier.</li>
-  <li>Implemented proper UTF-8 encoding and decoding in
-  java.lang.String.</li>
-  <li>Added support for volatile fields.  Avian now fully supports the
-  Java Memory Model.</li>
-  <li>Added an ad-hoc interface for generating heap snapshots at
-  runtime, useful for memory profiling.</li>
-  <li>Added support for ahead-of-time compilation and classfile
-  parsing.  This feature helps improve the startup time of large
-  applications and reduces GC overhead, at the cost of larger
-  binaries.</li>
-  <li>Fixed various bugs and performance bottlenecks.</li>
+  <li>Add optional support for optimizing tail calls such that the
+  caller's stack frame is replaced with the callee's.  This convention
+  ensures proper tail recursion, suitable for languages such as
+  Scheme.</li>
+  <li>Add optional support for first-class,
+  reentrant <a href="http://en.wikipedia.org/wiki/Continuation">continuations</a>.
+  See the <a href="javadoc/avian/Continuations.html">API
+  documentation</a> for details</li>
+  <li>Add support for native 64-bit Windows and OS X builds.</li>
+  <li>Support building with the Microsoft Visual C++ compiler on
+  Windows</li>
+  <li>Add support for scalar SSE instructions to the JIT compiler,
+  making floating point code up to five times faster on machines which
+  support SSE2.</li>
+  <li>Support intrinsics in the JIT compiler, which convert
+  performance-sensitive calls to methods such as Math.sqrt into
+  optimized, inline code.</li>
+  <li>Use atomic operations instead of mutexes where appropriate in
+  the VM.  This avoids expensive system calls due to mutex contention
+  and is especially valuable for multithreaded programs which make
+  heavy use of the JNI.</li>
+  <li>Support runtime-visible annotation annotations.</li>
+  <li>Support both blocking and non-blocking NIO sockets.</li>
+  <li>Add preliminary support for building with GNU Classpath.  This
+  feature is still under development.</li>
 </ul>
 
 <h3>Future Releases</h3>
 <p>
-  The next major release will be 1.0.  These are the remaining
-  criteria for that release:
+  The next major release will be 1.0.  This is the remaining criterium
+  for that release:
 </p>
 <ul>
-  <li>Rework memory allocation in garbage collector to improve
-  performance in low memory situations
-  (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
-  for details)</li>
   <li>Adapt Avian to support a more complete class library, such as
   GNU Classpath or IcedTea.  This will give us a much larger body of
   software to test against.</li>
@@ -53,11 +61,13 @@
 
 <h3>Post-1.0 Ideas</h3>
 <ul>
+  <li>Rework memory allocation in garbage collector to improve
+  performance in low memory situations
+  (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
+  for details)</li>
   <li>Experiment with optimizations and extensions to better support
   languages other than Java
     <ul>
-      <li>Tail call optimization</li>
-      <li>Cooperative multitasking</li>
       <li>First-class functions</li>
       <li><a href="http://jcp.org/en/jsr/detail?id=292">invokedynamic</a></li>
     </ul>

@@ -29,6 +29,12 @@
     <td><a href="swt-examples/linux-i386/paint">download</a></td>
   </tr>
   <tr>
+    <td>OS X/x86_64</td>
+    <td><a href="swt-examples/darwin-x86_64/example">download</a></td>
+    <td><a href="swt-examples/darwin-x86_64/graphics">download</a></td>
+    <td><a href="swt-examples/darwin-x86_64/paint">download</a></td>
+  </tr>
+  <tr>
     <td>OS X/i386</td>
     <td><a href="swt-examples/darwin-i386/example">download</a></td>
     <td><a href="swt-examples/darwin-i386/graphics">download</a></td>
@@ -41,6 +47,12 @@
     <td><a href="swt-examples/darwin-powerpc/paint">download</a></td>
   </tr>
   <tr>
+    <td>Windows/x86_64</td>
+    <td><a href="swt-examples/windows-x86_64/example.exe">download</a></td>
+    <td><a href="swt-examples/windows-x86_64/graphics.exe">download</a></td>
+    <td><a href="swt-examples/windows-x86_64/paint.exe">download</a></td>
+  </tr>
+  <tr>
     <td>Windows/i386</td>
     <td><a href="swt-examples/windows-i386/example.exe">download</a></td>
     <td><a href="swt-examples/windows-i386/graphics.exe">download</a></td>
@@ -48,52 +60,90 @@
   </tr>
 </table>
 <p>
-  Note that the OS X builds are not compressed using UPX, due to
-  issues encountered with building and using UPX on OS X 10.4.
+  Note that the 32-bit OS X builds and 64-bit Windows builds are not
+  compressed using UPX, due to lack of support for these platforms.
 </p>
 
 <h3>Building</h3>
 <p>
   If you'd like to build these examples yourself, try the following:
-  <div class="code"><pre># install UPX if you don't already have it
+  <div class="code"><pre># install UPX if you don't already have it, or specify "upx=:" when
+# building to disable its use
 
 mkdir work
 cd work
 git clone git://oss.readytalk.com/avian.git
 git clone git://oss.readytalk.com/avian-swt-examples.git
-# use curl -O on OS X:
-wget http://oss.readytalk.com/avian/proguard4.3-patched.tar.gz
-tar xzf proguard4.3-patched.tar.gz
-
-# for linux-i386:
-wget http://oss.readytalk.com/avian/swt-3.4-gtk-linux-x86.zip
-mkdir -p swt-3.4/linux-i386
-unzip -d swt-3.4/linux-i386 swt-3.4-gtk-linux-x86.zip
 
 # for linux-x86_64:
-wget http://oss.readytalk.com/avian/swt-3.4-gtk-linux-x86_64.zip
-mkdir -p swt-3.4/linux-x86_64
-unzip -d swt-3.4/linux-x86_64 swt-3.4-gtk-linux-x86_64.zip
+wget http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+wget http://oss.readytalk.com/avian/swt-3.5.1-gtk-linux-x86_64.zip
+mkdir -p swt-3.5/linux-x86_64
+unzip -d swt-3.5/linux-x86_64 swt-3.5.1-gtk-linux-x86_64.zip
+cd avian-swt-examples
+make arch=x86_64
 
-# for windows-i386:
-wget http://oss.readytalk.com/avian/swt-3.4-win32-win32-x86.zip
-mkdir -p swt-3.4/windows-i386
-unzip -d swt-3.4/windows-i386 swt-3.4-win32-win32-x86.zip
-git clone git://oss.readytalk.com/win32.git
+# for linux-i386:
+wget http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+wget http://oss.readytalk.com/avian/swt-3.5.1-gtk-linux-x86.zip
+mkdir -p swt-3.5/linux-i386
+unzip -d swt-3.5/linux-i386 swt-3.5.1-gtk-linux-x86.zip
+cd avian-swt-examples
+make arch=i386
+
+# for darwin-x86_64:
+curl -O http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+curl -O http://oss.readytalk.com/avian/swt-3.5.1-cocoa-macosx-x86_64.zip
+mkdir -p swt-3.5/darwin-x86_64
+unzip -d swt-3.5/darwin-x86_64 swt-3.5.1-cocoa-macosx-x86_64.zip
+cd avian-swt-examples
+make arch=x86_64
 
 # for darwin-i386:
+curl -O http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+# (note that we use SWT 3.4 on 32-bit OS X for 10.4 compatibility)
 curl -O http://oss.readytalk.com/avian/swt-3.4-carbon-macosx-javac.zip
 mkdir -p swt-3.4/darwin-i386
 unzip -d swt-3.4/darwin-i386 swt-3.4-carbon-macosx-javac.zip
+cd avian-swt-examples
+make arch=i386
 
 # for darwin-powerpc:
+curl -O http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+# (note that we use SWT 3.4 on 32-bit OS X for 10.4 compatibility)
 curl -O http://oss.readytalk.com/avian/swt-3.4-carbon-macosx-javac.zip
 mkdir -p swt-3.4/darwin-powerpc
 unzip -d swt-3.4/darwin-powerpc swt-3.4-carbon-macosx-javac.zip
-
 cd avian-swt-examples
-# use make platform=windows if cross-compiling for Win32:
-make</pre></div>
+make arch=powerpc
+
+# for windows-x86_64:
+wget http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+wget http://oss.readytalk.com/avian/swt-3.5.1-win32-win32-x86_64.zip
+mkdir -p swt-3.5/windows-x86_64
+unzip -d swt-3.5/windows-x86_64 swt-3.5.1-win32-win32-x86_64.zip
+git clone git://oss.readytalk.com/win64.git
+cd avian-swt-examples
+# use "make arch=x86_64 platform=windows" if cross-compiling:
+make arch=x86_64
+
+# for windows-i386:
+wget http://oss.readytalk.com/avian/proguard4.4.tar.gz
+tar xzf proguard4.4.tar.gz
+wget http://oss.readytalk.com/avian/swt-3.5.1-win32-win32-x86.zip
+mkdir -p swt-3.5/windows-i386
+unzip -d swt-3.5/windows-i386 swt-3.5.1-win32-win32-x86.zip
+git clone git://oss.readytalk.com/win32.git
+cd avian-swt-examples
+# use "make arch=i386 platform=windows" if cross-compiling:
+make arch=i386</pre></div>
+
 </p>
 
 [end]
