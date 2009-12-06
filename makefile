@@ -19,8 +19,7 @@ extra_sources = $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-#host = oss.readytalk.com:/var/www/avian
-host = jdpc.ecovate.com:/usr/local/tomcat/webapps/palomar/avian
+host = oss.readytalk.com:/var/www/avian-0.3
 
 .PHONY: all
 all: $(results) $(extra_results)
