@@ -5,7 +5,7 @@ rsync = rsync -rvz
 out = output
 src = source
 tpl = templates
-work = /tmp/work
+work = ../
 
 translator = ./translate.scm
 tr = $(translator) --template-directory $(tpl) --output-directory $(out)
@@ -19,7 +19,7 @@ extra_sources = $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-host = oss.readytalk.com:/var/www/avian-0.3
+host = oss.readytalk.com:/var/www/avian
 
 .PHONY: all
 all: $(results) $(extra_results)
