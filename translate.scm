@@ -97,6 +97,9 @@
          ((eq? x 'template)
           (translate (conc (template-directory) "/" (car remainder))))
 
+         ((eq? x 'include)
+          (doinclude (car remainder)))
+
          (else
           (error "invalid command: " x)))))
 
@@ -173,8 +176,21 @@
             (cons c (if escaped (cons (escape-character) string) string))
             #f)))))
 
+(define (parse-include)
+  (let loop ([c (peek-char)]
+             [string '()])
+    (if (eof-object? c)
+      (list (reverse-list->string string))
+      (begin
+        (read-char)
+        (loop (peek-char) (cons c string))))))
+
 (define (translate file)
   (let ([content (with-input-from-file file (lambda () (parse)))])
+    (until-end evaluate content)))
+
+(define (doinclude file)
+  (let ([content (with-input-from-file file (lambda () (parse-include)))])
     (until-end evaluate content)))
 
 (define (show-usage-and-exit)

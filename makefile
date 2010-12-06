@@ -19,7 +19,7 @@ extra_sources = $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-host = oss.readytalk.com:/var/www/avian
+host = oss.readytalk.com:/var/www/avian-0.4
 
 .PHONY: all
 all: $(results) $(extra_results)
@@ -42,6 +42,9 @@ deploy-examples:
 	$(rsync) $(work)/avian-swt-examples/build/linux-x86_64/example/example $(host)/swt-examples/linux-x86_64/ || true
 	$(rsync) $(work)/avian-swt-examples/build/linux-x86_64/graphics/graphics $(host)/swt-examples/linux-x86_64/ || true
 	$(rsync) $(work)/avian-swt-examples/build/linux-x86_64/paint/paint $(host)/swt-examples/linux-x86_64/ || true
+	$(rsync) $(work)/avian-swt-examples/build/linux-arm/example/example $(host)/swt-examples/linux-arm/ || true
+	$(rsync) $(work)/avian-swt-examples/build/linux-arm/graphics/graphics $(host)/swt-examples/linux-arm/ || true
+	$(rsync) $(work)/avian-swt-examples/build/linux-arm/paint/paint $(host)/swt-examples/linux-arm/ || true
 	$(rsync) $(work)/avian-swt-examples/build/darwin-i386/example/example $(host)/swt-examples/darwin-i386/ || true
 	$(rsync) $(work)/avian-swt-examples/build/darwin-i386/graphics/graphics $(host)/swt-examples/darwin-i386/ || true
 	$(rsync) $(work)/avian-swt-examples/build/darwin-i386/paint/paint $(host)/swt-examples/darwin-i386/ || true
@@ -58,7 +61,12 @@ deploy-avian:
 	$(rsync) $(work)/avian/build/avian-*.tar.bz2 $(host)/
 	$(rsync) $(work)/avian/build/javadoc/ $(host)/javadoc/
 
-$(out)/%.html: $(src)/%.xml $(translator) $(templates)
+$(out)/readme.txt: $(work)/avian/readme.txt
+	@echo "generating $(@)"
+	@mkdir -p $(dir $(@))
+	sed -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g' < $(<) > $(@)
+
+$(out)/%.html: $(src)/%.xml $(translator) $(templates) $(out)/readme.txt
 	@echo "generating $(@)"
 	@mkdir -p $(dir $(@))
 	$(tr) $(<)

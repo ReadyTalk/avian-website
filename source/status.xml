@@ -5,15 +5,15 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.3.  As of this release, everything
+  The latest release is version 0.4.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
   to the <a href="http://groups.google.com/group/avian">discussion
   group</a> if you have any problems.
 </p>
 
-<a href="avian-0.3.tar.bz2">
+<a href="avian-0.4.tar.bz2">
   <div class="code">
-    Download Avian 0.3
+    Download Avian 0.4
   </div>
 </a>
 
@@ -21,46 +21,47 @@
   Recent changes:
 </p>
 <ul>
-  <li>Add optional support for optimizing tail calls such that the
-  caller's stack frame is replaced with the callee's.  This convention
-  ensures proper tail recursion, suitable for languages such as
-  Scheme.</li>
-  <li>Add optional support for first-class,
-  reentrant <a href="http://en.wikipedia.org/wiki/Continuation">continuations</a>.
-  See the <a href="javadoc/avian/Continuations.html">API
-  documentation</a> for details.</li>
-  <li>Add support for native 64-bit Windows and OS X builds.</li>
-  <li>Support building with the Microsoft Visual C++ compiler on
-  Windows.</li>
-  <li>Add support for scalar SSE instructions to the JIT compiler,
-  making floating point code up to five times faster on machines which
-  support SSE2.</li>
-  <li>Support intrinsics in the JIT compiler, which convert
-  performance-sensitive calls to methods such as Math.sqrt into
-  optimized, inline code.</li>
-  <li>Use atomic operations instead of mutexes where appropriate in
-  the VM.  This avoids expensive system calls due to mutex contention
-  and is especially valuable for multithreaded programs which make
-  heavy use of the JNI.</li>
-  <li>Support runtime-visible annotations.</li>
-  <li>Support both blocking and non-blocking NIO sockets.</li>
-  <li>Add preliminary support for building with GNU Classpath.  This
-  feature is still under development.</li>
+  <li>Added ARM architecture support for Linux</li>
+  <li>Added support for using the OpenJDK class library as an
+  alternative to the default Avian class library</li>
+  <li>Dropped GNU Classpath support</li>
+  <li>Reworked classloading to support custom classloaders in
+  accordance with the Java Language Specification</li>
+  <li>Reimplemented object monitors to avoid unecessary allocation and
+  deallocation of native OS mutexes</li>
+  <li>Fixed many bugs</li>
 </ul>
 
 <h3>Future Releases</h3>
 <p>
-  The next major release will be 1.0.  This is the remaining criterium
-  for that release:
+  The next major release will be 1.0.  The plan for that release
+  includes the following:
 </p>
 <ul>
-  <li>Adapt Avian to support a more complete class library, such as
-  GNU Classpath or IcedTea.  This will give us a much larger body of
-  software to test against.</li>
+  <li>Modify the VM to throw an OutOfMemoryError instead of aborting
+  the process if it runs out of memory.  This will entail reworking
+  exception handling in native code since each allocation may
+  potentially throw an exception</li>
+  <li>Handle stack overflow in the JIT build by intercepting the
+  appropriate OS signal(s) and throwing a StackOverflowError</li>
+  <li>Test a variety of Java applications on Avian/OpenJDK and fix any
+  problems found.  Candidates include:
+    <ul>
+      <li><a href="http://eclipse.org/">Eclipse</a></li>
+      <li><a href="http://tomcat.apache.org/">Apache Tomcat</a></li>
+      <li><a href="http://dacapobench.org/">The DaCapo Benchmarks</a></li>
+      <li>(insert your favorite app here)</li>
+    </ul>
+  </li>
 </ul>
 
 <h3>Post-1.0 Ideas</h3>
 <ul>
+  <li>Improve ahead-of-time compilation using <a
+  href="http://llvm.org/">LLVM</a></li>
+  <li>Add support for ahead-of-time escape analysis and bytecode
+  annotation to indicate where objects may be safely allocated on the
+  stack instead of the heap</li>
   <li>Rework memory allocation in garbage collector to improve
   performance in low memory situations
   (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
@@ -72,7 +73,7 @@
       <li><a href="http://jcp.org/en/jsr/detail?id=292">invokedynamic</a></li>
     </ul>
   </li>
-  <li>Support additional architectures such as ARM, Sparc, and MIPS</li>
+  <li>Support additional architectures such as MIPS and 64-bit PowerPC</li>
 </ul>
 
 <h3>Non-goals</h3>
