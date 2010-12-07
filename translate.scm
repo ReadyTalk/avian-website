@@ -4,6 +4,8 @@
 
 ;(require-extension debug) (debug #f)
 
+(use posix)
+
 (define template-directory (make-parameter "./templates"))
 (define output-directory (make-parameter "./output"))
 
@@ -100,6 +102,9 @@
          ((eq? x 'include)
           (doinclude (car remainder)))
 
+         ((eq? x 'size)
+          (size (car remainder)))
+
          (else
           (error "invalid command: " x)))))
 
@@ -192,6 +197,11 @@
 (define (doinclude file)
   (let ([content (with-input-from-file file (lambda () (parse-include)))])
     (until-end evaluate content)))
+
+(define (size file)
+  (write-string*
+   (number->string (inexact->exact (floor (/ (file-size file) 1024)))))
+  (write-string* "K"))
 
 (define (show-usage-and-exit)
   (display (conc "usage: translate.scm"

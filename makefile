@@ -2,7 +2,8 @@ MAKEFLAGS = -s
 
 rsync = rsync -rvz
 
-out = output
+build = build
+out = $(build)/output
 src = source
 tpl = templates
 work = ../
@@ -10,56 +11,109 @@ work = ../
 translator = ./translate.scm
 tr = $(translator) --template-directory $(tpl) --output-directory $(out)
 
-sources = $(shell find $(src) -name '[^.]*.xml')
+sources := $(shell find $(src) -name '[^.]*.xml')
 results = $(foreach x,$(sources),$(patsubst $(src)/%.xml,$(out)/%.html,$(x)))
 
-templates = $(shell find $(tpl) -name '[^.]*.xml')
+templates := $(shell find $(tpl) -name '[^.]*.xml')
 
-extra_sources = $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
+extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
 host = oss.readytalk.com:/var/www/avian-0.4
+web-host = http://oss.readytalk.com/avian-0.4
+
+version = 0.4
+proguard-version = 4.6beta1
+swt-version = 3.6
+
+programs = example graphics paint
+
+swt-zip-map = \
+	linux-x86_64:swt-$(swt-version)-gtk-linux-x86_64.zip \
+	linux-i386:swt-$(swt-version)-gtk-linux-x86.zip \
+	linux-arm:swt-$(swt-version)-gtk-linux-arm.zip \
+	darwin-x86_64-cocoa:swt-$(swt-version)-cocoa-macosx.zip \
+	darwin-i386-carbon:swt-$(swt-version)-carbon-macosx.zip \
+	darwin-powerpc-carbon:swt-$(swt-version)-carbon-macosx.zip \
+	windows-x86_64:swt-$(swt-version)-win32-win32-x86_64.zip \
+	windows-i386:swt-$(swt-version)-win32-win32-x86.zip
+
+platforms = $(sort $(foreach x,$(swt-zip-map),$(word 1,$(subst :, ,$(x)))))
+
+linux-build-host = localhost
+darwin-build-host = qaimac
+
+examples = $(foreach x,$(platforms),$(build)/$(x)-example.d)
+get-platform = $(word 1,$(subst -, ,$(1)))
+get-arch = $(word 2,$(subst -, ,$(1)))
+get-subplatform = $(word 3,$(subst -, ,$(1)))
+full-platform = $(patsubst $(build)/%-example.d,%,$(1))
+arch = $(call get-arch,$(call full-platform,$(1)))
+platform = $(call get-platform,$(call full-platform,$(1)))
+subplatform = $(call get-subplatform,$(call full-platform,$(1)))
+build-host = $(if $(filter darwin,$(call platform,$(1))),$(darwin-build-host),$(linux-build-host))
+extension = $(if $(filter windows,$(call platform,$(1))),.exe)
+map-value = $(patsubst $(1):%,%,$(filter $(1):%,$(2)))
+swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
+windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone git://oss.readytalk.com/win64.git || (cd win64 && git pull);,git clone git://oss.readytalk.com/win32.git || (cd win32 && git pull);)
+git-clone = $(if $(filter windows,$(call platform,$(1))),$(call windows-git-clone,$(1)))
+windows-upx = $(if $(filter x86_64,$(call arch,$(1))),:,upx --lzma --best)
+upx = $(if $(filter windows,$(call platform,$(1))),$(call windows-upx,$(1)),upx --lzma --best)
 
 .PHONY: all
 all: $(results) $(extra_results)
 
 .PHONY: deploy
-deploy: $(results) $(extra_results)
+deploy: deploy-avian deploy-examples deploy-pages
+
+.PHONY: deploy-pages
+deploy-pages: $(results) $(extra_results)
 	$(rsync) $(out)/ $(host)/
 
+.PHONY: build-examples
+build-examples: $(examples)
+
 .PHONY: deploy-examples
-deploy-examples:
-	$(rsync) $(work)/avian-swt-examples/build/windows-i386/example/example.exe $(host)/swt-examples/windows-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/windows-i386/graphics/graphics.exe $(host)/swt-examples/windows-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/windows-i386/paint/paint.exe $(host)/swt-examples/windows-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/windows-x86_64/example/example.exe $(host)/swt-examples/windows-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/windows-x86_64/graphics/graphics.exe $(host)/swt-examples/windows-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/windows-x86_64/paint/paint.exe $(host)/swt-examples/windows-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-i386/example/example $(host)/swt-examples/linux-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-i386/graphics/graphics $(host)/swt-examples/linux-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-i386/paint/paint $(host)/swt-examples/linux-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-x86_64/example/example $(host)/swt-examples/linux-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-x86_64/graphics/graphics $(host)/swt-examples/linux-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-x86_64/paint/paint $(host)/swt-examples/linux-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-arm/example/example $(host)/swt-examples/linux-arm/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-arm/graphics/graphics $(host)/swt-examples/linux-arm/ || true
-	$(rsync) $(work)/avian-swt-examples/build/linux-arm/paint/paint $(host)/swt-examples/linux-arm/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-i386/example/example $(host)/swt-examples/darwin-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-i386/graphics/graphics $(host)/swt-examples/darwin-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-i386/paint/paint $(host)/swt-examples/darwin-i386/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-x86_64/example/example $(host)/swt-examples/darwin-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-x86_64/graphics/graphics $(host)/swt-examples/darwin-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-x86_64/paint/paint $(host)/swt-examples/darwin-x86_64/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-powerpc/example/example $(host)/swt-examples/darwin-powerpc/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-powerpc/graphics/graphics $(host)/swt-examples/darwin-powerpc/ || true
-	$(rsync) $(work)/avian-swt-examples/build/darwin-powerpc/paint/paint $(host)/swt-examples/darwin-powerpc/ || true
+deploy-examples: build-examples
+	$(rsync) $(build)/swt-examples/ $(host)/swt-examples/
 
 .PHONY: deploy-avian
 deploy-avian:
-	(cd $(work)/avian && make tarball javadoc)
-	$(rsync) $(work)/avian/build/avian-*.tar.bz2 $(host)/
+	(cd $(work)/avian && make version=$(version) tarball javadoc)
+	$(rsync) $(work)/avian/build/avian-$(version).tar.bz2 $(host)/
 	$(rsync) $(work)/avian/build/javadoc/ $(host)/javadoc/
+	(cd $(work)/avian-swt-examples && make version=$(version) tarball)
+	$(rsync) $(work)/avian/build/avian-swt-examples-$(version).tar.bz2 $(host)/
+
+build-sequence = \
+	set -e; \
+	: rm -rf /tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	mkdir -p /tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	cd /tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	curl -Of $(web-host)/$(call swt-zip,$(1)); \
+	mkdir -p swt/$(call full-platform,$(1)); \
+	unzip -o -d swt/$(call full-platform,$(1)) $(call swt-zip,$(1)); \
+	curl -Of $(web-host)/proguard$(proguard-version).tar.gz; \
+	tar xzf proguard$(proguard-version).tar.gz; \
+	curl -Of $(web-host)/avian-$(version).tar.bz2; \
+	tar xjf avian-$(version).tar.bz2; \
+	curl -Of $(web-host)/avian-swt-examples-$(version).tar.bz2; \
+	tar xjf avian-swt-examples-$(version).tar.bz2; \
+	$(call git-clone,$(1)) \
+	cd avian-swt-examples; \
+	make upx=: full-platform=$(call full-platform,$(1));
+
+$(examples):
+	@mkdir -p $(build)/swt-examples
+	@echo "making examples for $(call full-platform,$(@))"
+	ssh $(call build-host,$(@)) '$(call build-sequence,$(@))'
+	set -e; for x in $(programs); do \
+		$(rsync) $(call build-host,$(@)):/tmp/$${USER}-avian-$(call full-platform,$(@))/avian-swt-examples/build/$(call full-platform,$(@))/$${x}/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/; \
+		$(call upx,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/$${x}$(call extension,$(@)); \
+	done
+	@mkdir -p $(dir $(@))
+	@touch $(@)
 
 $(out)/readme.txt: $(work)/avian/readme.txt
 	@echo "generating $(@)"
@@ -78,5 +132,5 @@ $(extra_results): $(out)/%: $(tpl)/%
 
 .PHONY: clean
 clean:
-	@echo "removing $(out)"
-	rm -rf $(out)
+	@echo "removing $(build)"
+	rm -rf $(build)
