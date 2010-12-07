@@ -116,8 +116,8 @@ cd work
 curl -Of http://oss.readytalk.com/avian/proguard4.6beta1.tar.gz
 tar xzf proguard4.6beta1.tar.gz
 curl -Of http://oss.readytalk.com/avian/${swt_zip}
-mkdir -p swt-3.6/${platform}
-unzip -d swt-3.6/${platform} ${swt_zip}
+mkdir -p swt/${platform}
+unzip -d swt/${platform} ${swt_zip}
 curl -Of http://oss.readytalk.com/avian/avian-0.4.tar.bz2
 tar xjf avian-0.4.tar.bz2
 curl -Of http://oss.readytalk.com/avian/avian-swt-examples-0.4.tar.bz2
