@@ -41,7 +41,7 @@
   <li>Modify the VM to throw an OutOfMemoryError instead of aborting
   the process if it runs out of memory.  This will entail reworking
   exception handling in native code since each allocation may
-  potentially throw an exception</li>
+  potentially throw an exception.</li>
   <li>Handle stack overflow in the JIT build by intercepting the
   appropriate OS signal(s) and throwing a StackOverflowError</li>
   <li>Test a variety of Java applications on Avian/OpenJDK and fix any
