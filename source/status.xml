@@ -34,7 +34,7 @@
 
 <h3>Future Releases</h3>
 <p>
-  The next major release will be 1.0.  The plan for that release
+  The next major release will be 0.5.  The plan for that release
   includes the following:
 </p>
 <ul>
@@ -44,6 +44,8 @@
   potentially throw an exception.</li>
   <li>Handle stack overflow in the JIT build by intercepting the
   appropriate OS signal(s) and throwing a StackOverflowError</li>
+  <li>Intercept e.g. SIGFPEs and turn them into
+  ArithmeticExceptions</li>
   <li>Test a variety of Java applications on Avian/OpenJDK and fix any
   problems found.  Candidates include:
     <ul>
@@ -54,6 +56,10 @@
     </ul>
   </li>
 </ul>
+<p>
+  The current plan is to do a feature freeze after 0.5 to allow the
+  code to stabilize in preparation for a 1.0 release.
+</p>
 
 <h3>Post-1.0 Ideas</h3>
 <ul>
