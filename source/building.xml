@@ -2,7 +2,7 @@
 
 [define body]
 <h2>Building</h2>
-<pre>[include "output/readme.txt"]
+<pre>[include "build/output/readme.txt"]
 </pre>
 
 [end]

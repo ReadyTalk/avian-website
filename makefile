@@ -33,7 +33,7 @@ swt-zip-map = \
 	linux-x86_64:swt-$(swt-version)-gtk-linux-x86_64.zip \
 	linux-i386:swt-$(swt-version)-gtk-linux-x86.zip \
 	linux-arm:swt-$(swt-version)-gtk-linux-arm.zip \
-	darwin-x86_64-cocoa:swt-$(swt-version)-cocoa-macosx.zip \
+	darwin-x86_64-cocoa:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
 	darwin-i386-carbon:swt-$(swt-version)-carbon-macosx.zip \
 	darwin-powerpc-carbon:swt-$(swt-version)-carbon-macosx.zip \
 	windows-x86_64:swt-$(swt-version)-win32-win32-x86_64.zip \
@@ -59,13 +59,14 @@ swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
 windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone git://oss.readytalk.com/win64.git || (cd win64 && git pull);,git clone git://oss.readytalk.com/win32.git || (cd win32 && git pull);)
 git-clone = $(if $(filter windows,$(call platform,$(1))),$(call windows-git-clone,$(1)))
 windows-upx = $(if $(filter x86_64,$(call arch,$(1))),:,upx --lzma --best)
-upx = $(if $(filter windows,$(call platform,$(1))),$(call windows-upx,$(1)),upx --lzma --best)
+darwin-upx = $(if $(filter x86_64,$(call arch,$(1))),upx --lzma --best,:)
+upx = $(if $(filter darwin,$(call platform,$(1))),$(call darwin-upx,$(1)),$(if $(filter windows,$(call platform,$(1))),$(call windows-upx,$(1)),upx --lzma --best))
 
 .PHONY: all
 all: $(results) $(extra_results)
 
 .PHONY: deploy
-deploy: deploy-avian deploy-examples deploy-pages
+deploy: deploy-pages
 
 .PHONY: deploy-pages
 deploy-pages: $(results) $(extra_results)
@@ -88,7 +89,7 @@ deploy-avian:
 
 build-sequence = \
 	set -e; \
-	: rm -rf /tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	rm -rf /tmp/$${USER}-avian-$(call full-platform,$(1)); \
 	mkdir -p /tmp/$${USER}-avian-$(call full-platform,$(1)); \
 	cd /tmp/$${USER}-avian-$(call full-platform,$(1)); \
 	curl -Of $(web-host)/$(call swt-zip,$(1)); \
@@ -110,6 +111,7 @@ $(examples):
 	ssh $(call build-host,$(@)) '$(call build-sequence,$(@))'
 	set -e; for x in $(programs); do \
 		$(rsync) $(call build-host,$(@)):/tmp/$${USER}-avian-$(call full-platform,$(@))/avian-swt-examples/build/$(call full-platform,$(@))/$${x}/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/; \
+		cp $(build)/swt-examples/$(call full-platform,$(@))/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/$${x}-uncompressed$(call extension,$(@)); \
 		$(call upx,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/$${x}$(call extension,$(@)); \
 	done
 	@mkdir -p $(dir $(@))
