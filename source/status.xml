@@ -22,13 +22,13 @@
 </p>
 <ul>
   <li>Added support for Linux on PowerPC</li>
-  <li>Modified VM to throw OutOfMemoryErrors, StackOverflowErrors, and
-  ArithmeticErrors instead of aborting the process when it runs out of
-  heap space, detects stack overflow, or traps a divide-by-zero,
+  <li>Modified VM to throw an OutOfMemoryError, StackOverflowError, or
+  ArithmeticError instead of aborting the process when it runs out of
+  heap space, detects stack overflow, or traps divide-by-zero,
   respectively</li>
   <li>Fixed many bugs concerning OpenJDK classpath compatibility.
   Many popular apps and libraries such as Eclipse, Tomcat, Geronimo,
-  Batik, Xalan, Lucene, Hibernate, and Jython have been verified to
+  Batik, Lucene, Spring, Hibernate, and Jython have been verified to
   work with Avian/OpenJDK.</li>
 </ul>
 
