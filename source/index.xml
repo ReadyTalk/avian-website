@@ -23,7 +23,7 @@
   unecessary branches</li>
 </ul>
 <p>
-  The class library is designed to be as loosely-coupled as possible,
+  The class library is designed to be as loosely coupled as possible,
   allowing tools
   like <a href="http://proguard.sourceforge.net/">ProGuard</a> to
   aggressively isolate the minimum code needed for an application.
@@ -34,11 +34,11 @@
 <p>
   Platform-specific code is hidden behind a generic interface, so
   adding support for new OSes is easy.  Avian currently supports Linux
-  (i386, x86_64, and ARM), Windows (i386 and x86_64), and OS X (i386,
-  x86_64, and PowerPC), with more to come.
+  (i386, x86_64, ARM, and PowerPC), Windows (i386 and x86_64), and OS
+  X (i386, x86_64, and PowerPC), with more to come.
 </p>
 <p>
-  The only third-party dependency beyond OS-provided libraries
+  The only third party dependency beyond OS-provided libraries
   is <a href="http://zlib.net/">zlib</a>, which is itself very
   portable.  Although the VM is written in C++, it does not depend on
   the C++ standard library, and is therefore robust in the face of ABI

@@ -20,12 +20,12 @@ extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-host = oss.readytalk.com:/var/www/avian-0.4
-web-host = http://oss.readytalk.com/avian-0.4
+host = oss.readytalk.com:/var/www/avian-0.5
+web-host = http://oss.readytalk.com/avian-0.5
 
-version = 0.4
+version = 0.5
 proguard-version = 4.6beta1
-swt-version = 3.6
+swt-version = 3.7
 
 programs = example graphics paint
 
@@ -33,6 +33,7 @@ swt-zip-map = \
 	linux-x86_64:swt-$(swt-version)-gtk-linux-x86_64.zip \
 	linux-i386:swt-$(swt-version)-gtk-linux-x86.zip \
 	linux-arm:swt-$(swt-version)-gtk-linux-arm.zip \
+	linux-powerpc:swt-$(swt-version)-gtk-linux-powerpc.zip \
 	darwin-x86_64-cocoa:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
 	darwin-i386-carbon:swt-$(swt-version)-carbon-macosx.zip \
 	darwin-powerpc-carbon:swt-$(swt-version)-carbon-macosx.zip \
@@ -52,8 +53,8 @@ full-platform = $(patsubst $(build)/%-example.d,%,$(1))
 arch = $(call get-arch,$(call full-platform,$(1)))
 platform = $(call get-platform,$(call full-platform,$(1)))
 subplatform = $(call get-subplatform,$(call full-platform,$(1)))
-build-host = $(if $(filter darwin,$(call platform,$(1))),$(darwin-build-host),$(linux-build-host))
 extension = $(if $(filter windows,$(call platform,$(1))),.exe)
+build-host = $(if $(filter darwin,$(call platform,$(1))),$(darwin-build-host),$(linux-build-host))
 map-value = $(patsubst $(1):%,%,$(filter $(1):%,$(2)))
 swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
 windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone git://oss.readytalk.com/win64.git || (cd win64 && git pull);,git clone git://oss.readytalk.com/win32.git || (cd win32 && git pull);)

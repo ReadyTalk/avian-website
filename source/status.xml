@@ -5,15 +5,15 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.4.  As of this release, everything
+  The latest release is version 0.5.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
   to the <a href="http://groups.google.com/group/avian">discussion
   group</a> if you have any problems.
 </p>
 
-<a href="avian-0.4.tar.bz2">
+<a href="avian-0.5.tar.bz2">
   <div class="code">
-    Download Avian 0.4
+    Download Avian 0.5
   </div>
 </a>
 
@@ -21,44 +21,23 @@
   Recent changes:
 </p>
 <ul>
-  <li>Added ARM architecture support for Linux</li>
-  <li>Added support for using the OpenJDK class library as an
-  alternative to the default Avian class library</li>
-  <li>Dropped GNU Classpath support</li>
-  <li>Reworked classloading to support custom classloaders in
-  accordance with the Java Language Specification</li>
-  <li>Reimplemented object monitors to avoid unecessary allocation and
-  deallocation of native OS mutexes</li>
-  <li>Fixed many bugs</li>
+  <li>Added support for Linux on PowerPC</li>
+  <li>Modified VM to throw OutOfMemoryErrors, StackOverflowErrors, and
+  ArithmeticErrors instead of aborting the process when it runs out of
+  heap space, detects stack overflow, or traps a divide-by-zero,
+  respectively</li>
+  <li>Fixed many bugs concerning OpenJDK classpath compatibility.
+  Many popular apps and libraries such as Eclipse, Tomcat, Geronimo,
+  Batik, Xalan, Lucene, Hibernate, and Jython have been verified to
+  work with Avian/OpenJDK.</li>
 </ul>
 
 <h3>Future Releases</h3>
 <p>
-  The next major release will be 0.5.  The plan for that release
-  includes the following:
-</p>
-<ul>
-  <li>Modify the VM to throw an OutOfMemoryError instead of aborting
-  the process if it runs out of memory.  This will entail reworking
-  exception handling in native code since each allocation may
-  potentially throw an exception.</li>
-  <li>Handle stack overflow in the JIT build by intercepting the
-  appropriate OS signal(s) and throwing a StackOverflowError</li>
-  <li>Intercept e.g. SIGFPEs and turn them into
-  ArithmeticExceptions</li>
-  <li>Test a variety of Java applications on Avian/OpenJDK and fix any
-  problems found.  Candidates include:
-    <ul>
-      <li><a href="http://eclipse.org/">Eclipse</a></li>
-      <li><a href="http://tomcat.apache.org/">Apache Tomcat</a></li>
-      <li><a href="http://dacapobench.org/">The DaCapo Benchmarks</a></li>
-      <li>(insert your favorite app here)</li>
-    </ul>
-  </li>
-</ul>
-<p>
-  The current plan is to do a feature freeze after 0.5 to allow the
-  code to stabilize in preparation for a 1.0 release.
+  The next planned release is 1.0.  No new features or architectural
+  changes are planned except as necessary to fix bugs and to improve
+  application compatibility for the OpenJDK port.  The main goal is to
+  find and fix as many bugs as possible.
 </p>
 
 <h3>Post-1.0 Ideas</h3>
@@ -76,25 +55,12 @@
   languages other than Java
     <ul>
       <li>First-class functions</li>
+      <li>Lazy evaluation</li>
       <li><a href="http://jcp.org/en/jsr/detail?id=292">invokedynamic</a></li>
     </ul>
   </li>
   <li>Support additional architectures such as MIPS and 64-bit PowerPC</li>
 </ul>
-
-<h3>Non-goals</h3>
-<p>
-  Avian is not a complete Java implementation, nor is it intended to
-  be.  Thus, less-used Java features will only be added if they are
-  easily maintainable and do not add significant overhead to
-  applications which don't use them.
-</p>
-<p>
-  In particular, Avian does no bytecode verification in the VM and no
-  security checks in the class library.  Applications which run
-  untrusted bytecode must therefore do their own verification and
-  sanitation.
-</p>
 
 [end]
 
