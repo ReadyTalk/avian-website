@@ -30,6 +30,7 @@
   Many popular apps and libraries such as Eclipse, Tomcat, Geronimo,
   Batik, Lucene, Spring, Hibernate, and Jython have been verified to
   work with Avian/OpenJDK.</li>
+  <li>Improved localization support</li>
 </ul>
 
 <h3>Future Releases</h3>
