@@ -20,12 +20,14 @@ extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-host = oss.readytalk.com:/var/www/avian-0.5
-web-host = http://oss.readytalk.com/avian-0.5
+version = 0.6
 
-version = 0.5
+host = oss.readytalk.com:/var/www/avian-$(version)
+web-host = http://oss.readytalk.com/avian-$(version)
+
 proguard-version = 4.6beta1
 swt-version = 3.7
+lzma-version = 920
 
 programs = example graphics paint
 
@@ -43,7 +45,7 @@ swt-zip-map = \
 platforms = $(sort $(foreach x,$(swt-zip-map),$(word 1,$(subst :, ,$(x)))))
 
 linux-build-host = localhost
-darwin-build-host = qaimac
+darwin-build-host = macmini2-build2.e
 
 examples = $(foreach x,$(platforms),$(build)/$(x)-example.d)
 get-platform = $(word 1,$(subst -, ,$(1)))
@@ -59,9 +61,6 @@ map-value = $(patsubst $(1):%,%,$(filter $(1):%,$(2)))
 swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
 windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone git://oss.readytalk.com/win64.git || (cd win64 && git pull);,git clone git://oss.readytalk.com/win32.git || (cd win32 && git pull);)
 git-clone = $(if $(filter windows,$(call platform,$(1))),$(call windows-git-clone,$(1)))
-windows-upx = $(if $(filter x86_64,$(call arch,$(1))),:,upx --lzma --best)
-darwin-upx = $(if $(filter x86_64,$(call arch,$(1))),upx --lzma --best,:)
-upx = $(if $(filter darwin,$(call platform,$(1))),$(call darwin-upx,$(1)),$(if $(filter windows,$(call platform,$(1))),$(call windows-upx,$(1)),upx --lzma --best))
 
 .PHONY: all
 all: $(results) $(extra_results)
@@ -98,22 +97,26 @@ build-sequence = \
 	unzip -o -d swt/$(call full-platform,$(1)) $(call swt-zip,$(1)); \
 	curl -Of $(web-host)/proguard$(proguard-version).tar.gz; \
 	tar xzf proguard$(proguard-version).tar.gz; \
+	curl -Of $(web-host)/lzma$(lzma-version).tar.bz2; \
+	(mkdir -p lzma-$(lzma-version) \
+		&& cd lzma-$(lzma-version) \
+		&& tar xjf ../lzma$(lzma-version).tar.bz2); \
 	curl -Of $(web-host)/avian-$(version).tar.bz2; \
 	tar xjf avian-$(version).tar.bz2; \
 	curl -Of $(web-host)/avian-swt-examples-$(version).tar.bz2; \
 	tar xjf avian-swt-examples-$(version).tar.bz2; \
 	$(call git-clone,$(1)) \
 	cd avian-swt-examples; \
-	make upx=: full-platform=$(call full-platform,$(1));
+	make lzma=$$(pwd)/../lzma-$(lzma-version) \
+		full-platform=$(call full-platform,$(1));
 
 $(examples):
 	@mkdir -p $(build)/swt-examples
 	@echo "making examples for $(call full-platform,$(@))"
 	ssh $(call build-host,$(@)) '$(call build-sequence,$(@))'
 	set -e; for x in $(programs); do \
-		$(rsync) $(call build-host,$(@)):/tmp/$${USER}-avian-$(call full-platform,$(@))/avian-swt-examples/build/$(call full-platform,$(@))/$${x}/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/; \
+		$(rsync) $(call build-host,$(@)):/tmp/$${USER}-avian-$(call full-platform,$(@))/avian-swt-examples/build/$(call full-platform,$(@))-lzma/$${x}/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/; \
 		cp $(build)/swt-examples/$(call full-platform,$(@))/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/$${x}-uncompressed$(call extension,$(@)); \
-		$(call upx,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/$${x}$(call extension,$(@)); \
 	done
 	@mkdir -p $(dir $(@))
 	@touch $(@)

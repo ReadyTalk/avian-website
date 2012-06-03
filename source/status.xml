@@ -5,15 +5,15 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.5.  As of this release, everything
+  The latest release is version 0.6.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
   to the <a href="http://groups.google.com/group/avian">discussion
   group</a> if you have any problems.
 </p>
 
-<a href="avian-0.5.tar.bz2">
+<a href="avian-0.6.tar.bz2">
   <div class="code">
-    Download Avian 0.5
+    Download Avian 0.6
   </div>
 </a>
 
@@ -21,16 +21,13 @@
   Recent changes:
 </p>
 <ul>
-  <li>Added support for Linux on PowerPC</li>
-  <li>Modified VM to throw an OutOfMemoryError, StackOverflowError, or
-  ArithmeticError instead of aborting the process when it runs out of
-  heap space, detects stack overflow, or traps divide-by-zero,
-  respectively</li>
-  <li>Fixed many bugs concerning OpenJDK classpath compatibility.
-  Many popular apps and libraries such as Eclipse, Tomcat, Geronimo,
-  Batik, Lucene, Spring, Hibernate, and Jython have been verified to
-  work with Avian/OpenJDK.</li>
-  <li>Improved localization support</li>
+  <li>Added support for Apple iOS on ARM and x86_32</li>
+  <li>Upgraded OpenJDK port to version 7, which is now the minimum
+  supported version</li>
+  <li>Modified AOT compilation code to export symbols for each
+  compiled method, making debugger stack traces much more useful</li>
+  <li>Implemented experimental support for GDB's JIT symbol API</li>
+  <li>Enabled use of LLVM Clang to build as an alternative to GCC</li>
 </ul>
 
 <h3>Future Releases</h3>
@@ -43,6 +40,7 @@
 
 <h3>Post-1.0 Ideas</h3>
 <ul>
+  <li>Experiment with trace-based JIT compilation</li>
   <li>Improve ahead-of-time compilation using <a
   href="http://llvm.org/">LLVM</a></li>
   <li>Add support for ahead-of-time escape analysis and bytecode
