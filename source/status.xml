@@ -26,7 +26,8 @@
   supported version</li>
   <li>Modified AOT compilation code to export symbols for each
   compiled method, making debugger stack traces much more useful</li>
-  <li>Implemented experimental support for GDB's JIT symbol API</li>
+  <li>Added support for hardware floating point instructions on
+  ARM</li>
   <li>Enabled use of LLVM Clang to build as an alternative to GCC</li>
 </ul>
 

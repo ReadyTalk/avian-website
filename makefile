@@ -25,7 +25,7 @@ version = 0.6
 host = oss.readytalk.com:/var/www/avian-$(version)
 web-host = http://oss.readytalk.com/avian-$(version)
 
-proguard-version = 4.6beta1
+proguard-version = 4.8
 swt-version = 3.7
 lzma-version = 920
 
@@ -46,6 +46,7 @@ platforms = $(sort $(foreach x,$(swt-zip-map),$(word 1,$(subst :, ,$(x)))))
 
 linux-build-host = localhost
 darwin-build-host = macmini2-build2.e
+darwin-powerpc-build-host = macmini
 
 examples = $(foreach x,$(platforms),$(build)/$(x)-example.d)
 get-platform = $(word 1,$(subst -, ,$(1)))
@@ -56,7 +57,7 @@ arch = $(call get-arch,$(call full-platform,$(1)))
 platform = $(call get-platform,$(call full-platform,$(1)))
 subplatform = $(call get-subplatform,$(call full-platform,$(1)))
 extension = $(if $(filter windows,$(call platform,$(1))),.exe)
-build-host = $(if $(filter darwin,$(call platform,$(1))),$(darwin-build-host),$(linux-build-host))
+build-host = $(if $(filter darwin,$(call platform,$(1))),$(if $(filter powerpc,$(call arch,$(1))),$(darwin-powerpc-build-host),$(darwin-build-host)),$(linux-build-host))
 map-value = $(patsubst $(1):%,%,$(filter $(1):%,$(2)))
 swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
 windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone git://oss.readytalk.com/win64.git || (cd win64 && git pull);,git clone git://oss.readytalk.com/win32.git || (cd win32 && git pull);)
@@ -89,9 +90,9 @@ deploy-avian:
 
 build-sequence = \
 	set -e; \
-	rm -rf /tmp/$${USER}-avian-$(call full-platform,$(1)); \
-	mkdir -p /tmp/$${USER}-avian-$(call full-platform,$(1)); \
-	cd /tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	rm -rf /var/tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	mkdir -p /var/tmp/$${USER}-avian-$(call full-platform,$(1)); \
+	cd /var/tmp/$${USER}-avian-$(call full-platform,$(1)); \
 	curl -Of $(web-host)/$(call swt-zip,$(1)); \
 	mkdir -p swt/$(call full-platform,$(1)); \
 	unzip -o -d swt/$(call full-platform,$(1)) $(call swt-zip,$(1)); \
@@ -115,8 +116,7 @@ $(examples):
 	@echo "making examples for $(call full-platform,$(@))"
 	ssh $(call build-host,$(@)) '$(call build-sequence,$(@))'
 	set -e; for x in $(programs); do \
-		$(rsync) $(call build-host,$(@)):/tmp/$${USER}-avian-$(call full-platform,$(@))/avian-swt-examples/build/$(call full-platform,$(@))-lzma/$${x}/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/; \
-		cp $(build)/swt-examples/$(call full-platform,$(@))/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/$${x}-uncompressed$(call extension,$(@)); \
+		$(rsync) $(call build-host,$(@)):/var/tmp/$${USER}-avian-$(call full-platform,$(@))/avian-swt-examples/build/$(call full-platform,$(@))-lzma/$${x}/$${x}$(call extension,$(@)) $(build)/swt-examples/$(call full-platform,$(@))/; \
 	done
 	@mkdir -p $(dir $(@))
 	@touch $(@)
