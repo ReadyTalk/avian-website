@@ -20,10 +20,10 @@ extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-version = 0.6
+version = 0.7
 
-host = oss.readytalk.com:/var/www/avian-$(version)
-web-host = http://oss.readytalk.com/avian-$(version)
+host = 10.0.2.2:/Users/dicej/Sites/avian
+web-host = http://10.0.2.2/~dicej/avian
 
 proguard-version = 4.8
 swt-version = 3.7
@@ -38,15 +38,13 @@ swt-zip-map = \
 	linux-powerpc:swt-$(swt-version)-gtk-linux-powerpc.zip \
 	darwin-x86_64-cocoa:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
 	darwin-i386-carbon:swt-$(swt-version)-carbon-macosx.zip \
-	darwin-powerpc-carbon:swt-$(swt-version)-carbon-macosx.zip \
 	windows-x86_64:swt-$(swt-version)-win32-win32-x86_64.zip \
 	windows-i386:swt-$(swt-version)-win32-win32-x86.zip
 
 platforms = $(sort $(foreach x,$(swt-zip-map),$(word 1,$(subst :, ,$(x)))))
 
 linux-build-host = localhost
-darwin-build-host = macmini2-build2.e
-darwin-powerpc-build-host = macmini
+darwin-build-host = 10.0.2.2
 
 examples = $(foreach x,$(platforms),$(build)/$(x)-example.d)
 get-platform = $(word 1,$(subst -, ,$(1)))
@@ -57,7 +55,7 @@ arch = $(call get-arch,$(call full-platform,$(1)))
 platform = $(call get-platform,$(call full-platform,$(1)))
 subplatform = $(call get-subplatform,$(call full-platform,$(1)))
 extension = $(if $(filter windows,$(call platform,$(1))),.exe)
-build-host = $(if $(filter darwin,$(call platform,$(1))),$(if $(filter powerpc,$(call arch,$(1))),$(darwin-powerpc-build-host),$(darwin-build-host)),$(linux-build-host))
+build-host = $(if $(filter darwin,$(call platform,$(1))),$(darwin-build-host),$(linux-build-host))
 map-value = $(patsubst $(1):%,%,$(filter $(1):%,$(2)))
 swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
 windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone git://oss.readytalk.com/win64.git || (cd win64 && git pull);,git clone git://oss.readytalk.com/win32.git || (cd win32 && git pull);)
@@ -121,12 +119,7 @@ $(examples):
 	@mkdir -p $(dir $(@))
 	@touch $(@)
 
-$(out)/readme.txt: $(work)/avian/readme.txt
-	@echo "generating $(@)"
-	@mkdir -p $(dir $(@))
-	sed -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g' < $(<) > $(@)
-
-$(out)/%.html: $(src)/%.xml $(translator) $(templates) $(out)/readme.txt
+$(out)/%.html: $(src)/%.xml $(translator) $(templates)
 	@echo "generating $(@)"
 	@mkdir -p $(dir $(@))
 	$(tr) $(<)

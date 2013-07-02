@@ -5,15 +5,15 @@
 
 <h3>Current Release</h3>
 <p>
-  The latest release is version 0.6.  As of this release, everything
+  The latest release is version 0.7.  As of this release, everything
   should work as advertised on the supported platforms.  Please post
   to the <a href="http://groups.google.com/group/avian">discussion
   group</a> if you have any problems.
 </p>
 
-<a href="avian-0.6.tar.bz2">
+<a href="avian-0.7.tar.bz2">
   <div class="code">
-    Download Avian 0.6
+    Download Avian 0.7
   </div>
 </a>
 
@@ -21,14 +21,11 @@
   Recent changes:
 </p>
 <ul>
-  <li>Added support for Apple iOS on ARM and x86_32</li>
-  <li>Upgraded OpenJDK port to version 7, which is now the minimum
-  supported version</li>
-  <li>Modified AOT compilation code to export symbols for each
-  compiled method, making debugger stack traces much more useful</li>
-  <li>Added support for hardware floating point instructions on
-  ARM</li>
-  <li>Enabled use of LLVM Clang to build as an alternative to GCC</li>
+  <li>Lots of bugfixes throughout the code</li>
+  <li>Added support for FreeBSD</li>
+  <li>Improved Scala support</li>
+  <li>Added support for building against the Android/Harmony class library as an alternative to the OpenJDK and Avian libraries</li>
+  <li>Removed official support for OS X on PowerPC (the code remains intact for now, but not officially supported)</li>
 </ul>
 
 <h3>Future Releases</h3>
