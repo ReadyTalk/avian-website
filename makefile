@@ -20,13 +20,13 @@ extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-version = 0.7
+version = 1.0
 
 host = 10.0.2.2:/Users/dicej/Sites/avian
 web-host = http://10.0.2.2/~dicej/avian
 
-proguard-version = 4.8
-swt-version = 3.7
+proguard-version = 4.11
+swt-version = 4.3
 lzma-version = 920
 
 programs = example graphics paint
@@ -35,9 +35,9 @@ swt-zip-map = \
 	linux-x86_64:swt-$(swt-version)-gtk-linux-x86_64.zip \
 	linux-i386:swt-$(swt-version)-gtk-linux-x86.zip \
 	linux-arm:swt-$(swt-version)-gtk-linux-arm.zip \
-	linux-powerpc:swt-$(swt-version)-gtk-linux-powerpc.zip \
-	darwin-x86_64-cocoa:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
-	darwin-i386-carbon:swt-$(swt-version)-carbon-macosx.zip \
+	linux-powerpc:swt-$(swt-version)-gtk-linux-ppc.zip \
+	darwin-x86_64:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
+	darwin-i386:swt-$(swt-version)-cocoa-macosx.zip \
 	windows-x86_64:swt-$(swt-version)-win32-win32-x86_64.zip \
 	windows-i386:swt-$(swt-version)-win32-win32-x86.zip
 
