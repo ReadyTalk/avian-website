@@ -4,95 +4,56 @@
 <h2>Examples</h2>
 <p>
   Avian is well suited to building small, self-contained applications.
-  To demonstrate this, we've taken a few demo applications from the
-  Eclipse CVS repository and built them using
-  Avian, <a href="http://proguard.sourceforge.net/">ProGuard</a>,
-  and <a href="http://www.7-zip.org/sdk.html">LZMA</a>.
+  To demonstrate this, we've taken a demo application from the Eclipse
+  SCM repository and built it using Avian, <a
+  href="http://proguard.sourceforge.net/">ProGuard</a>, and <a
+  href="http://www.7-zip.org/sdk.html">LZMA</a>.
 </p>
 <table>
   <tr>
     <th>Platform</th>
-    <th>Control</th>
-    <th>Graphics</th>
-    <th>Paint</th>
+    <th>Example</th>
   </tr>
   <tr>
     <td>Linux/x86_64</td>
     <td><a href="../avian-web/swt-examples/linux-x86_64/example">download</a>
     ([size "build/swt-examples/linux-x86_64/example"])</td>
-    <td><a href="../avian-web/swt-examples/linux-x86_64/graphics">download</a>
-    ([size "build/swt-examples/linux-x86_64/graphics"])</td>
-    <td><a href="../avian-web/swt-examples/linux-x86_64/paint">download</a>
-    ([size "build/swt-examples/linux-x86_64/paint"])</td>
   </tr>
   <tr>
     <td>Linux/i386</td>
     <td><a href="../avian-web/swt-examples/linux-i386/example">download</a>
     ([size "build/swt-examples/linux-i386/example"])</td>
-    <td><a href="../avian-web/swt-examples/linux-i386/graphics">download</a>
-    ([size "build/swt-examples/linux-i386/graphics"])</td>
-    <td><a href="../avian-web/swt-examples/linux-i386/paint">download</a>
-    ([size "build/swt-examples/linux-i386/paint"])</td>
   </tr>
   <tr>
     <td>Linux/ARM</td>
     <td><a href="../avian-web/swt-examples/linux-arm/example">download</a>
     ([size "build/swt-examples/linux-arm/example"])</td>
-    <td><a href="../avian-web/swt-examples/linux-arm/graphics">download</a>
-    ([size "build/swt-examples/linux-arm/graphics"])</td>
-    <td><a href="../avian-web/swt-examples/linux-arm/paint">download</a>
-    ([size "build/swt-examples/linux-arm/paint"])</td>
-  </tr>
-  <tr>
-    <td>Linux/PowerPC</td>
-    <td><a href="../avian-web/swt-examples/linux-powerpc/example">download</a>
-    ([size "build/swt-examples/linux-powerpc/example"])</td>
-    <td><a href="../avian-web/swt-examples/linux-powerpc/graphics">download</a>
-    ([size "build/swt-examples/linux-powerpc/graphics"])</td>
-    <td><a href="../avian-web/swt-examples/linux-powerpc/paint">download</a>
-    ([size "build/swt-examples/linux-powerpc/paint"])</td>
   </tr>
   <tr>
     <td>OS X/x86_64</td>
     <td><a href="../avian-web/swt-examples/darwin-x86_64/example">download</a>
     ([size "build/swt-examples/darwin-x86_64/example"])</td>
-    <td><a href="../avian-web/swt-examples/darwin-x86_64/graphics">download</a>
-    ([size "build/swt-examples/darwin-x86_64/graphics"])</td>
-    <td><a href="../avian-web/swt-examples/darwin-x86_64/paint">download</a>
-    ([size "build/swt-examples/darwin-x86_64/paint"])</td>
   </tr>
   <tr>
     <td>OS X/i386</td>
     <td><a href="../avian-web/swt-examples/darwin-i386/example">download</a>
     ([size "build/swt-examples/darwin-i386/example"])</td>
-    <td><a href="../avian-web/swt-examples/darwin-i386/graphics">download</a>
-    ([size "build/swt-examples/darwin-i386/graphics"])</td>
-    <td><a href="../avian-web/swt-examples/darwin-i386/paint">download</a>
-    ([size "build/swt-examples/darwin-i386/paint"])</td>
   </tr>
   <tr>
     <td>Windows/x86_64</td>
     <td><a href="../avian-web/swt-examples/windows-x86_64/example.exe">download</a>
     ([size "build/swt-examples/windows-x86_64/example.exe"])</td>
-    <td><a href="../avian-web/swt-examples/windows-x86_64/graphics.exe">download</a>
-    ([size "build/swt-examples/windows-x86_64/graphics.exe"])</td>
-    <td><a href="../avian-web/swt-examples/windows-x86_64/paint.exe">download</a>
-    ([size "build/swt-examples/windows-x86_64/paint.exe"])</td>
   </tr>
   <tr>
     <td>Windows/i386</td>
     <td><a href="../avian-web/swt-examples/windows-i386/example.exe">download</a>
     ([size "build/swt-examples/windows-i386/example.exe"])</td>
-    <td><a href="../avian-web/swt-examples/windows-i386/graphics.exe">download</a>
-    ([size "build/swt-examples/windows-i386/graphics.exe"])</td>
-    <td><a href="../avian-web/swt-examples/windows-i386/paint.exe">download</a>
-    ([size "build/swt-examples/windows-i386/paint.exe"])</td>
   </tr>
 </table>
 <br/>
 <h3>Building</h3>
 <p>
-  If you'd like to build these examples yourself, try the following:
+  If you'd like to build this example yourself, try the following:
   <div class="code"><pre># Set the platform and swt_zip environment variables according to the
 # following table:
 #
@@ -101,7 +62,6 @@
 # linux-x86_64           swt-4.3-gtk-linux-x86_64.zip
 # linux-i386             swt-4.3-gtk-linux-x86.zip
 # linux-arm              swt-4.3-gtk-linux-arm.zip
-# linux-powerpc          swt-4.3-gtk-linux-ppc.zip
 # darwin-x86_64          swt-4.3-cocoa-macosx-x86_64.zip
 # darwin-i386            swt-4.3-cocoa-macosx.zip
 # windows-x86_64         swt-4.3-win32-win32-x86_64.zip
@@ -125,7 +85,7 @@ git clone https://github.com/ReadyTalk/win32.git
 # needed only for 64-bit Windows builds:
 git clone https://github.com/ReadyTalk/win64.git
 cd avian-swt-examples
-make lzma=$(pwd)/../lzma-920 full-platform=${platform}</pre></div>
+make lzma=$(pwd)/../lzma-920 full-platform=${platform} example</pre></div>
 
 </p>
 

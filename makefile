@@ -1,4 +1,4 @@
- MAKEFLAGS = -s
+MAKEFLAGS = -s
 
 rsync = rsync -rz
 
@@ -23,7 +23,7 @@ extra_results = $(foreach x,$(extra_sources),$(patsubst \
 
 version = 1.0
 
-gh-pages = ../gh-pages
+gh-pages = ../readytalk.github.io/avian-1.0
 avian-web = ../readytalk.github.io/avian-web
 web-host = http://jdpc.ecovate.com:8080/avian-web
 
@@ -31,13 +31,12 @@ proguard-version = 4.11
 swt-version = 4.3
 lzma-version = 920
 
-programs = example graphics paint
+programs = example
 
 swt-zip-map = \
 	linux-x86_64:swt-$(swt-version)-gtk-linux-x86_64.zip \
 	linux-i386:swt-$(swt-version)-gtk-linux-x86.zip \
 	linux-arm:swt-$(swt-version)-gtk-linux-arm.zip \
-	linux-powerpc:swt-$(swt-version)-gtk-linux-ppc.zip \
 	darwin-x86_64:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
 	darwin-i386:swt-$(swt-version)-cocoa-macosx.zip \
 	windows-x86_64:swt-$(swt-version)-win32-win32-x86_64.zip \
@@ -47,7 +46,6 @@ test-host-map = \
 	linux-x86_64:$(USER):localhost:22 \
 	linux-i386:$(USER):localhost:22 \
 	linux-arm:$(USER):192.168.50.134:5555 \
-	linux-powerpc:$(USER):localhost:5556 \
 	darwin-x86_64:joel.dice:192.168.50.40:22 \
 	darwin-i386:joel.dice:192.168.50.40:22 \
 	windows-x86_64:Joel:192.168.50.38:22 \
@@ -57,7 +55,6 @@ build-host-map = \
 	linux-x86_64:$(USER):localhost:22 \
 	linux-i386:$(USER):localhost:22 \
 	linux-arm:$(USER):localhost:22 \
-	linux-powerpc:$(USER):localhost:22 \
 	darwin-x86_64:joel.dice:192.168.50.40:22 \
 	darwin-i386:joel.dice:192.168.50.40:22 \
 	windows-x86_64:$(USER):localhost:22 \
@@ -67,6 +64,7 @@ platforms = $(sort $(foreach x,$(swt-zip-map),$(word 1,$(subst :, ,$(x)))))
 
 examples = $(foreach x,$(platforms),$(build)/$(x)-example.d)
 tests = $(foreach x,$(platforms),$(build)/$(x)-test.d)
+ci-tests = $(foreach x,$(platforms),$(build)/$(x)-ci.d)
 get-platform = $(word 1,$(subst -, ,$(1)))
 get-arch = $(word 2,$(subst -, ,$(1)))
 get-subplatform = $(word 3,$(subst -, ,$(1)))
@@ -106,6 +104,9 @@ build-examples: $(examples)
 .PHONY: test
 test: $(tests)
 
+.PHONY: ci
+ci: $(ci-tests)
+
 .PHONY: deploy-examples
 deploy-examples: build-examples
 	cp -a $(build)/swt-examples $(avian-web)/
@@ -139,7 +140,7 @@ build-sequence = \
 	$(call git-clone,$(1)) \
 	cd avian-swt-examples; \
 	make lzma=$$(pwd)/../lzma-$(lzma-version) \
-		full-platform=$(call full-platform,$(1));
+		full-platform=$(call full-platform,$(1)) $(programs);
 
 $(examples):
 	@mkdir -p $(build)/swt-examples
@@ -167,9 +168,25 @@ test-sequence = \
 		remote-test-port=$(call test-port,$(1)) test;
 
 $(tests):
-	@mkdir -p $(build)/test
 	@echo "building $(call full-platform,$(@)) on $(call build-user,$(@))@$(call build-host,$(@)):$(call build-port,$(@)) and testing on $(call test-user,$(@))@$(call test-host,$(@)):$(call test-port,$(@))"
 	ssh -p $(call build-port,$(@))  $(call build-user,$(@))@$(call build-host,$(@)) '$(call test-sequence,$(@))'
+	@mkdir -p $(dir $(@))
+	@touch $(@)
+
+ci-sequence = \
+	set -e; \
+	rm -rf $(call tmpdir,$(1)); \
+	mkdir -p $(call tmpdir,$(1)); \
+	cd $(call tmpdir,$(1)); \
+	curl -Of $(web-host)/avian-$(version).tar.bz2; \
+	tar xjf avian-$(version).tar.bz2; \
+	$(call git-clone,$(1)) \
+	cd avian; \
+	arch=$(call arch,$(1)) platform=$(call platform,$(1)) bash test/ci.sh;
+
+$(ci-tests):
+	@echo "running ci.sh for $(call full-platform,$(@)) on $(call test-user,$(@))@$(call test-host,$(@)):$(call test-port,$(@))"
+	ssh -p $(call test-port,$(@))  $(call test-user,$(@))@$(call test-host,$(@)) '$(call ci-sequence,$(@))'
 	@mkdir -p $(dir $(@))
 	@touch $(@)
 
