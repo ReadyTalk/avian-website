@@ -38,7 +38,7 @@
   performance in low memory situations
   (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
   for details)</li>
-  <li>Support additional architectures such as MIPS, 64-bit PowerPC, and 64-bit ARM</li>
+  <li>Support additional architectures such as 64-bit ARM</li>
 </ul>
 
 [end]
