@@ -84,7 +84,9 @@ build-user = $(call map-value1,$(call full-platform,$(1)),$(build-host-map))
 build-host = $(call map-value2,$(call full-platform,$(1)),$(build-host-map))
 build-port = $(call map-value3,$(call full-platform,$(1)),$(build-host-map))
 swt-zip = $(call map-value,$(call full-platform,$(1)),$(swt-zip-map))
-windows-git-clone = $(if $(filter x86_64,$(call arch,$(1))),git clone https://github.com/readytalk/win64.git || (cd win64 && git pull);,git clone https://github.com/readytalk/win32.git || (cd win32 && git pull);)
+windows-git-clone = \
+	git clone https://github.com/readytalk/win64.git || (cd win64 && git pull); \
+	git clone https://github.com/readytalk/win32.git || (cd win32 && git pull);
 git-clone = $(if $(filter windows,$(call platform,$(1))),$(call windows-git-clone,$(1)))
 tmpdir = $(tmp)/$(USER)-avian-$(call full-platform,$(1))
 
@@ -165,16 +167,18 @@ test-sequence = \
 	make arch=$(call arch,$(1)) platform=$(call platform,$(1)) \
 		remote-test-user=$(call test-user,$(1)) \
 		remote-test-host=$(call test-host,$(1)) \
-		remote-test-port=$(call test-port,$(1)) test;
+		remote-test-port=$(call test-port,$(1)) test; \
+	cd && rm -rf $(call tmpdir,$(1));
 
 $(tests):
 	@echo "building $(call full-platform,$(@)) on $(call build-user,$(@))@$(call build-host,$(@)):$(call build-port,$(@)) and testing on $(call test-user,$(@))@$(call test-host,$(@)):$(call test-port,$(@))"
-	ssh -p $(call build-port,$(@))  $(call build-user,$(@))@$(call build-host,$(@)) '$(call test-sequence,$(@))'
+	ssh -p $(call build-port,$(@)) $(call build-user,$(@))@$(call build-host,$(@)) '$(call test-sequence,$(@))'
 	@mkdir -p $(dir $(@))
 	@touch $(@)
 
 ci-sequence = \
 	set -e; \
+	if [ -z "$$JAVA_HOME" ]; then export JAVA_HOME=/cygdrive/e/jdk7; fi; \
 	rm -rf $(call tmpdir,$(1)); \
 	mkdir -p $(call tmpdir,$(1)); \
 	cd $(call tmpdir,$(1)); \
@@ -182,11 +186,13 @@ ci-sequence = \
 	tar xjf avian-$(version).tar.bz2; \
 	$(call git-clone,$(1)) \
 	cd avian; \
-	arch=$(call arch,$(1)) platform=$(call platform,$(1)) bash test/ci.sh;
+	arch=$(call arch,$(1)) platform=$(call platform,$(1)) skip_jdk_test=true \
+	  bash test/ci.sh; \
+	cd && rm -rf $(call tmpdir,$(1));
 
 $(ci-tests):
 	@echo "running ci.sh for $(call full-platform,$(@)) on $(call test-user,$(@))@$(call test-host,$(@)):$(call test-port,$(@))"
-	ssh -p $(call test-port,$(@))  $(call test-user,$(@))@$(call test-host,$(@)) '$(call ci-sequence,$(@))'
+	ssh -p $(call test-port,$(@)) $(call test-user,$(@))@$(call test-host,$(@)) '$(call ci-sequence,$(@))'
 	@mkdir -p $(dir $(@))
 	@touch $(@)
 
