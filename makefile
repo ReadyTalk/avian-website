@@ -21,9 +21,9 @@ extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-version = 1.0
+version = 1.0.3
 
-gh-pages = ../readytalk.github.io/avian-1.0
+gh-pages = ../readytalk.github.io/avian
 avian-web = ../readytalk.github.io/avian-web
 web-host = http://jdpc.ecovate.com:8080/avian-web
 
@@ -37,8 +37,8 @@ swt-zip-map = \
 	linux-x86_64:swt-$(swt-version)-gtk-linux-x86_64.zip \
 	linux-i386:swt-$(swt-version)-gtk-linux-x86.zip \
 	linux-arm:swt-$(swt-version)-gtk-linux-arm.zip \
-	darwin-x86_64:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
-	darwin-i386:swt-$(swt-version)-cocoa-macosx.zip \
+	macosx-x86_64:swt-$(swt-version)-cocoa-macosx-x86_64.zip \
+	macosx-i386:swt-$(swt-version)-cocoa-macosx.zip \
 	windows-x86_64:swt-$(swt-version)-win32-win32-x86_64.zip \
 	windows-i386:swt-$(swt-version)-win32-win32-x86.zip
 
@@ -46,8 +46,8 @@ test-host-map = \
 	linux-x86_64:$(USER):localhost:22 \
 	linux-i386:$(USER):localhost:22 \
 	linux-arm:$(USER):192.168.50.134:5555 \
-	darwin-x86_64:joel.dice:192.168.50.40:22 \
-	darwin-i386:joel.dice:192.168.50.40:22 \
+	macosx-x86_64:joel.dice:192.168.50.40:22 \
+	macosx-i386:joel.dice:192.168.50.40:22 \
 	windows-x86_64:Joel:192.168.50.38:22 \
 	windows-i386:Joel:192.168.50.38:22
 
@@ -55,8 +55,8 @@ build-host-map = \
 	linux-x86_64:$(USER):localhost:22 \
 	linux-i386:$(USER):localhost:22 \
 	linux-arm:$(USER):localhost:22 \
-	darwin-x86_64:joel.dice:192.168.50.40:22 \
-	darwin-i386:joel.dice:192.168.50.40:22 \
+	macosx-x86_64:joel.dice:192.168.50.40:22 \
+	macosx-i386:joel.dice:192.168.50.40:22 \
 	windows-x86_64:$(USER):localhost:22 \
 	windows-i386:$(USER):localhost:22
 
