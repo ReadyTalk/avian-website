@@ -21,9 +21,9 @@ extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
 extra_results = $(foreach x,$(extra_sources),$(patsubst \
 	$(tpl)/%,$(out)/%,$(x)))
 
-version = 1.0.3
+version = 1.1.0
 
-gh-pages = ../readytalk.github.io/avian
+gh-pages = ../gh-pages
 avian-web = ../readytalk.github.io/avian-web
 web-host = http://jdpc.ecovate.com:8080/avian-web
 
@@ -117,7 +117,8 @@ deploy-examples: build-examples
 deploy-avian:
 	(cd $(work)/avian && make version=$(version) tarball javadoc)
 	cp -a $(work)/avian/build/avian-$(version).tar.bz2 $(avian-web)/
-	cp -a $(work)/avian/build/javadoc/ $(avian-web)/javadoc-$(version)/
+	mkdir -p $(avian-web)/javadoc-$(version)/
+	cp -a $(work)/avian/build/javadoc/* $(avian-web)/javadoc-$(version)/
 	(cd $(work)/avian-swt-examples && make version=$(version) tarball)
 	cp -a $(work)/avian/build/avian-swt-examples-$(version).tar.bz2 $(avian-web)/
 
