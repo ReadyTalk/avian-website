@@ -1,0 +1,214 @@
+---
+layout: page
+title: Avian
+---
+          <section id="about">
+            <h2>About Avian</h2>
+            <p>
+              Avian is a lightweight virtual machine and class library designed to
+              provide a useful subset of Java's features, suitable for building
+              self-contained applications.
+            </p>
+
+            <h3>Efficient</h3>
+            <p>
+              The VM is implemented from scratch and designed to be both fast and
+              small.
+            </p>
+            <ul>
+              <li>Just-In-Time (JIT) compilation for fast method execution</li>
+              <li>Generational, copying garbage collection ensures short pause
+              times and good spatial locality</li>
+              <li>Thread-local heaps provide O(1) memory allocation with no
+              synchronization overhead</li>
+              <li>Null pointer dereferences are handled via OS signals to avoid
+              unecessary branches</li>
+            </ul>
+            <p>
+              The class library is designed to be as loosely coupled as possible,
+              allowing tools
+              like <a href="http://proguard.sourceforge.net/">ProGuard</a> to
+              aggressively isolate the minimum code needed for an application.
+              This translates to smaller downloads and faster startup.
+            </p>
+
+            <h3>Portable</h3>
+            <p>
+              Platform-specific code is hidden behind a generic interface, so
+              adding support for new OSes is easy.  Avian currently supports Linux
+              (i386, x86_64, and ARM), Windows (i386 and x86_64), OS X (i386 and
+              x86_64), iOS (i386 and ARM), and FreeBSD (i386 and x86_64).
+            </p>
+            <p>
+              The only third party dependency beyond OS-provided libraries
+              is <a href="http://zlib.net/">zlib</a>, which is itself very
+              portable.  Although the VM is written in C++, it does not depend on
+              the C++ standard library, and is therefore robust in the face of ABI
+              changes.
+            </p>
+
+            <h3>Embeddable</h3>
+            <p>
+              Not only can applications embed the VM, but the VM itself supports
+              class and resource loading from embedded jar files.  This means you
+              can produce a single executable containing your entire application,
+              thus simplifying the installation process.
+            </p>
+          </section>
+          <section id="download">
+            <h2>Download</h2>
+
+            <h3>Current Release</h3>
+            <p>
+              The latest release is version 1.1.0.  As of this release, everything
+              should work as advertised on the supported platforms.  Please post
+              to the <a href="http://groups.google.com/group/avian">discussion
+              group</a> if you have any problems.
+            </p>
+
+            <a href="../avian-web/avian-1.1.0.tar.bz2">
+              <div class="code">
+                Download Avian 1.1.0
+              </div>
+            </a>
+
+            <p>
+              Recent changes:
+            </p>
+            <ul>
+              <li>Lots of bugfixes throughout the code</li>
+              <li>Improved support for the Android and OpenJDK class libraries</li>
+              <li>More extensive java.util.concurrent implementation</li>
+            </ul>
+          </section>
+          <section id="documentation">
+            <h2>Documentation</h2>
+            <ul>
+              <li><a href="https://github.com/ReadyTalk/avian/blob/41adb74eb1895c662920fdfb7467ce415d9fa0b7/README.md">Building</a></li>
+              <li><a href="/avian-web/javadoc-1.1.0/index.html">Avian Classpath Javadoc</a></li>
+            </ul>
+          </section>
+          <section id="roadmap">
+            <h2>Roadmap</h2>
+            <h3>Ideas for the future</h3>
+            <ul>
+              <li>Add java.lang.invoke support</li>
+              <li>Experiment with trace-based JIT compilation</li>
+              <li>Improve ahead-of-time compilation using <a
+              href="http://llvm.org/">LLVM</a></li>
+              <li>Add support for escape analysis to determine where objects may
+              be safely allocated on the stack instead of the heap</li>
+              <li>Rework memory allocation in garbage collector to improve
+              performance in low memory situations
+              (see <a href="http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3">here</a>
+              for details)</li>
+              <li>Support additional architectures such as 64-bit ARM</li>
+            </ul>
+          </section>
+          <section id="examples">
+            <h2>Examples</h2>
+            <p>
+              Avian is well suited to building small, self-contained applications.
+              To demonstrate this, we've taken a demo application from the Eclipse
+              SCM repository and built it using Avian, <a
+              href="http://proguard.sourceforge.net/">ProGuard</a>, and <a
+              href="http://www.7-zip.org/sdk.html">LZMA</a>.
+            </p>
+            <table>
+              <tr>
+                <th>Platform</th>
+                <th>Example</th>
+              </tr>
+              <tr>
+                <td>Linux/x86_64</td>
+                <td><a href="../avian-web/swt-examples/linux-x86_64/example">download</a>
+                (1072K)</td>
+              </tr>
+              <tr>
+                <td>Linux/i386</td>
+                <td><a href="../avian-web/swt-examples/linux-i386/example">download</a>
+                (1028K)</td>
+              </tr>
+              <tr>
+                <td>Linux/ARM</td>
+                <td><a href="../avian-web/swt-examples/linux-arm/example">download</a>
+                (882K)</td>
+              </tr>
+              <tr>
+                <td>OS X/x86_64</td>
+                <td><a href="../avian-web/swt-examples/macosx-x86_64/example">download</a>
+                (1062K)</td>
+              </tr>
+              <tr>
+                <td>OS X/i386</td>
+                <td><a href="../avian-web/swt-examples/macosx-i386/example">download</a>
+                (1101K)</td>
+              </tr>
+              <tr>
+                <td>Windows/x86_64</td>
+                <td><a href="../avian-web/swt-examples/windows-x86_64/example.exe">download</a>
+                (1111K)</td>
+              </tr>
+              <tr>
+                <td>Windows/i386</td>
+                <td><a href="../avian-web/swt-examples/windows-i386/example.exe">download</a>
+                (1072K)</td>
+              </tr>
+            </table>
+            <br/>
+            <h3>Building</h3>
+            <p>If you'd like to build this example yourself, try the following:
+              <div class="code">
+    <pre># Set the platform and swt_zip environment variables according to the
+    # following table:
+    #
+    # platform               swt_zip
+    # --------               -------
+    # linux-x86_64           swt-4.3-gtk-linux-x86_64.zip
+    # linux-i386             swt-4.3-gtk-linux-x86.zip
+    # linux-arm              swt-4.3-gtk-linux-arm.zip
+    # macosx-x86_64          swt-4.3-cocoa-macosx-x86_64.zip
+    # macosx-i386            swt-4.3-cocoa-macosx.zip
+    # windows-x86_64         swt-4.3-win32-win32-x86_64.zip
+    # windows-i386           swt-4.3-win32-win32-x86.zip
+
+    mkdir work
+    cd work
+    curl -Of http://oss.readytalk.com/avian-web/proguard4.11.tar.gz
+    tar xzf proguard4.11.tar.gz
+    curl -Of http://oss.readytalk.com/avian-web/lzma920.tar.bz2
+    (mkdir -p lzma-920 && cd lzma-920 && tar xjf ../lzma920.tar.bz2)
+    curl -Of http://oss.readytalk.com/avian-web/${swt_zip}
+    mkdir -p swt/${platform}
+    unzip -d swt/${platform} ${swt_zip}
+    curl -Of http://oss.readytalk.com/avian-web/avian-1.1.0.tar.bz2
+    tar xjf avian-1.1.0.tar.bz2
+    curl -Of http://oss.readytalk.com/avian-web/avian-swt-examples-1.1.0.tar.bz2
+    tar xjf avian-swt-examples-1.1.0.tar.bz2
+    # needed only for 32-bit Windows builds:
+    git clone https://github.com/ReadyTalk/win32.git
+    # needed only for 64-bit Windows builds:
+    git clone https://github.com/ReadyTalk/win64.git
+    cd avian-swt-examples
+    make lzma=$(pwd)/../lzma-920 full-platform=${platform} example</pre>
+              </div>
+            </p>
+          </section>
+          <section id="license">
+            <h2>License</h2>
+
+<pre>Copyright (c) 2008-2014, Avian Contributors
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHORS DISCLAIM ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+</pre>
+          </section>
