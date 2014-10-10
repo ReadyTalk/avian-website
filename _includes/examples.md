@@ -7,13 +7,13 @@ and built it using Avian, [ProGuard](http://proguard.sourceforge.net/), and
 
 |Platform|Example|
 |--------|-------|
-|Linux/x86_64|[download](../avian-web/swt-examples/linux-x86_64/example)|
-|Linux/i386|[download](../avian-web/swt-examples/linux-i386/example)|
-|Linux/ARM|[download](../avian-web/swt-examples/linux-arm/example)|
-|OS X/x86_64|[download](../avian-web/swt-examples/macosx-x86_64/example)|
-|OS X/i386|[download](../avian-web/swt-examples/macosx-i386/example)|
-|Windows/x86_64|[download](../avian-web/swt-examples/windows-x86_64/example.exe)|
-|Windows/i386|[download](../avian-web/swt-examples/windows-i386/example.exe)|
+|Linux/x86_64|[download](../avian-web/swt-examples/linux-x86_64/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-x86_64/example %})|
+|Linux/i386|[download](../avian-web/swt-examples/linux-i386/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-i386/example %})|
+|Linux/ARM|[download](../avian-web/swt-examples/linux-arm/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-arm/example %})|
+|OS X/x86_64|[download](../avian-web/swt-examples/macosx-x86_64/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/macosx-x86_64/example %})|
+|OS X/i386|[download](../avian-web/swt-examples/macosx-i386/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/macosx-i386/example %})|
+|Windows/x86_64|[download](../avian-web/swt-examples/windows-x86_64/example.exe) ({% filesize ../readytalk.github.io/avian-web/swt-examples/windows-x86_64/example.exe %})|
+|Windows/i386|[download](../avian-web/swt-examples/windows-i386/example.exe) ({% filesize ../readytalk.github.io/avian-web/swt-examples/windows-i386/example.exe %})|
 
 ### Building
 
