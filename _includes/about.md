@@ -19,6 +19,7 @@ The class library is designed to be as loosely coupled as possible, allowing too
 
 Platform-specific code is hidden behind a generic interface, so adding support
 for new OSes is easy. Avian currently supports:
+
 * Linux (i386, x86_64, and ARM),
 * Windows (i386 and x86_64),
 * OS X (i386 and x86_64),

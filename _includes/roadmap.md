@@ -4,7 +4,7 @@
 
 * Add java.lang.invoke support
 * Experiment with trace-based JIT compilation
-* Improve ahead-of-time compilation using LLVM
+* Improve ahead-of-time compilation using [LLVM](http://llvm.org/)
 * Add support for escape analysis to determine where objects may be safely
 allocated on the stack instead of the heap
 * Rework memory allocation in garbage collector to improve performance in
