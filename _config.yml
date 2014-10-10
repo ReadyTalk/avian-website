@@ -1,3 +1,4 @@
+safe: false
 highlighter: pygments
 permalink: /news/:year-:month-:day-:title.html
 baseurl: /avian/

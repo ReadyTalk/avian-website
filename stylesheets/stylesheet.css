@@ -64,6 +64,17 @@ article {
   text-align: left;
 }
 
+th {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #821;
+}
+
+td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 #discuss_banner {
   display: block;
   position: absolute;
