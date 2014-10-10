@@ -3,23 +3,9 @@ MAKEFLAGS = -s
 rsync = rsync -rz
 
 build = build
-out = $(build)/output
-src = source
-tpl = templates
+out = _site
 work = ../
 tmp = /var/tmp
-
-translator = ./translate.scm
-tr = $(translator) --template-directory $(tpl) --output-directory $(out)
-
-sources := $(shell find $(src) -name '[^.]*.xml')
-results = $(foreach x,$(sources),$(patsubst $(src)/%.xml,$(out)/%.html,$(x)))
-
-templates := $(shell find $(tpl) -name '[^.]*.xml')
-
-extra_sources := $(shell find $(tpl) -name '[^.]*.css' -o -name '[^.]*.png')
-extra_results = $(foreach x,$(extra_sources),$(patsubst \
-	$(tpl)/%,$(out)/%,$(x)))
 
 version = 1.1.0
 
@@ -97,7 +83,7 @@ all: $(results) $(extra_results)
 deploy: deploy-pages
 
 .PHONY: deploy-pages
-deploy-pages: $(results) $(extra_results)
+deploy-pages: $(out)/index.html
 	cp -a $(out)/* $(gh-pages)/
 
 .PHONY: build-examples
@@ -197,15 +183,18 @@ $(ci-tests):
 	@mkdir -p $(dir $(@))
 	@touch $(@)
 
-$(out)/%.html: $(src)/%.xml $(translator) $(templates)
-	@echo "generating $(@)"
-	@mkdir -p $(dir $(@))
-	$(tr) $(<)
+all-sources = \
+	_config.yml \
+	index.html \
+	$(shell find _includes _layouts _plugins images javascripts stylesheets \
+		-name *.html -or \
+		-name *.md -or \
+		-name *.rb -or \
+		-name *.png -or \
+		-name *.css)
 
-$(extra_results): $(out)/%: $(tpl)/%
-	@echo "copying $(<) to $(@)"
-	@mkdir -p $(dir $(@))
-	cp $(<) $(@)
+$(out)/index.html: $(all-sources)
+	jekyll build --trace
 
 .PHONY: clean
 clean:
