@@ -9,6 +9,7 @@ and built it using Avian, [ProGuard](http://proguard.sourceforge.net/), and
 |--------|-------|
 |Linux/x86_64|[download](../avian-web/swt-examples/linux-x86_64/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-x86_64/example %})|
 |Linux/i386|[download](../avian-web/swt-examples/linux-i386/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-i386/example %})|
+|Linux/ARM64|[download](../avian-web/swt-examples/linux-arm64/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-arm64/example %})|
 |Linux/ARM|[download](../avian-web/swt-examples/linux-arm/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/linux-arm/example %})|
 |OS X/x86_64|[download](../avian-web/swt-examples/macosx-x86_64/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/macosx-x86_64/example %})|
 |OS X/i386|[download](../avian-web/swt-examples/macosx-i386/example) ({% filesize ../readytalk.github.io/avian-web/swt-examples/macosx-i386/example %})|
@@ -27,6 +28,7 @@ If you'd like to build this example yourself, try the following:
 # --------               -------
 # linux-x86_64           swt-4.3-gtk-linux-x86_64.zip
 # linux-i386             swt-4.3-gtk-linux-x86.zip
+# linux-arm64            swt-4.3-gtk-linux-arm64.zip
 # linux-arm              swt-4.3-gtk-linux-arm.zip
 # macosx-x86_64          swt-4.3-cocoa-macosx-x86_64.zip
 # macosx-i386            swt-4.3-cocoa-macosx.zip
@@ -42,10 +44,10 @@ curl -Of http://oss.readytalk.com/avian-web/lzma920.tar.bz2
 curl -Of http://oss.readytalk.com/avian-web/${swt_zip}
 mkdir -p swt/${platform}
 unzip -d swt/${platform} ${swt_zip}
-curl -Of http://oss.readytalk.com/avian-web/avian-1.1.0.tar.bz2
-tar xjf avian-1.1.0.tar.bz2
-curl -Of http://oss.readytalk.com/avian-web/avian-swt-examples-1.1.0.tar.bz2
-tar xjf avian-swt-examples-1.1.0.tar.bz2
+curl -Of http://oss.readytalk.com/avian-web/avian-1.2.0.tar.bz2
+tar xjf avian-1.2.0.tar.bz2
+curl -Of http://oss.readytalk.com/avian-web/avian-swt-examples-1.2.0.tar.bz2
+tar xjf avian-swt-examples-1.2.0.tar.bz2
 # needed only for 32-bit Windows builds:
 git clone https://github.com/ReadyTalk/win32.git
 # needed only for 64-bit Windows builds:

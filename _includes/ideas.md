@@ -1,6 +1,4 @@
-## Roadmap
-
-### Ideas for the future
+## Project Ideas
 
 * Add java.lang.invoke support
 * Experiment with trace-based JIT compilation
@@ -9,4 +7,3 @@
 allocated on the stack instead of the heap
 * Rework memory allocation in garbage collector to improve performance in
 low memory situations (see [here](http://groups.google.com/group/avian/browse_thread/thread/5b3f13bf198334b3) for details)
-* Support additional architectures such as 64-bit ARM
