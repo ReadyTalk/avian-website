@@ -31,6 +31,6 @@ Major features:
 * The Android class library is has neither a proprietary, nor a copyleft-style license, thus may be freely used and embedded in both proprietary and open-source projects, and may also be modified freely (the authors would be happy for any pull requests submitted).  Most non-Avian additional components are released under Apache license (the same as Android itself); others are mostly BSD.
 * The library has been pached to support Microsoft Windows, which was a major challenge, especially sockets and other I/O.
 
-[Avian-pack v0.1 (pre-release) with Avian 1.2.0 provided](https://github.com/bigfatbrowncat/avian-pack/releases/tag/v0.1-1.2.0)
+[Download Avian-pack v0.1 (pre-release) with Avian 1.2.0 provided](https://github.com/bigfatbrowncat/avian-pack/releases/tag/v0.1-1.2.0)
 
 Avian-pack is an independent project maintained by its creators: [@bigfatbrowncat](https://github.com/bigfatbrowncat) and [@JustAMan](https://github.com/JustAMan).  Please report issues and questions to that project.
