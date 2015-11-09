@@ -37,16 +37,16 @@ If you'd like to build this example yourself, try the following:
 
 mkdir work
 cd work
-curl -Of http://oss.readytalk.com/avian-web/proguard4.11.tar.gz
+curl -Of http://readytalk.github.io/avian-web/proguard4.11.tar.gz
 tar xzf proguard4.11.tar.gz
-curl -Of http://oss.readytalk.com/avian-web/lzma920.tar.bz2
+curl -Of http://readytalk.github.io/avian-web/lzma920.tar.bz2
 (mkdir -p lzma-920 && cd lzma-920 && tar xjf ../lzma920.tar.bz2)
-curl -Of http://oss.readytalk.com/avian-web/${swt_zip}
+curl -Of http://readytalk.github.io/avian-web/${swt_zip}
 mkdir -p swt/${platform}
 unzip -d swt/${platform} ${swt_zip}
-curl -Of http://oss.readytalk.com/avian-web/avian-1.2.0.tar.bz2
+curl -Of http://readytalk.github.io/avian-web/avian-1.2.0.tar.bz2
 tar xjf avian-1.2.0.tar.bz2
-curl -Of http://oss.readytalk.com/avian-web/avian-swt-examples-1.2.0.tar.bz2
+curl -Of http://readytalk.github.io/avian-web/avian-swt-examples-1.2.0.tar.bz2
 tar xjf avian-swt-examples-1.2.0.tar.bz2
 # needed only for 32-bit Windows builds:
 git clone https://github.com/ReadyTalk/win32.git
