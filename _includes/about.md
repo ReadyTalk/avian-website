@@ -1,6 +1,6 @@
 ## About Avian
 
-**PLEASE NOTE: This project is no longer being maintained or supported.**
+**PLEASE NOTE: This project is not currently being developed, maintained, or supported.**
 
 Avian is a lightweight virtual machine and class library designed to provide a useful subset of Java's features, suitable for building self-contained applications.
 
